@@ -1,0 +1,32 @@
+etape 1
+	ARG CHECK
+	-> Makefile libft
+	-> un seul argument
+	-> fichier bien .cub
+
+........................................
+
+etape 2
+	VALUE CHECK 
+	-> appeler gnl et lire les 6 premieres lignes non vides
+	-> moins de 6 lignes evidemment erreur
+	-> stocker les 6 lignes
+	
+	pour les directions:
+		check si y a bien NO, SO, WE, EA
+		PAS de doublons
+		check quil y a bien UNE direction et UN fichier par ligne
+	pour les couleurs:
+		X check si y a bien F,C 
+		X PAS de doublons
+		X et bien separees par des virgules (2 max)
+		X check quil y a bien 3 valeurs
+		X toutes entre 0 et 255 compris
+		
+etape 3
+	MAP CHECK
+
+	-> lire la map grace a la suite de GNL
+	-> stocker la map
+	-> tout mettre dans un rectangle rempli d'espace
+	// a suivre
