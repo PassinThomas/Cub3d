@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   define.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/30 19:01:43 by akasekai          #+#    #+#             */
-/*   Updated: 2024/12/02 13:51:18 by tpassin          ###   ########.fr       */
+/*   Created: 2024/12/02 13:45:31 by tpassin           #+#    #+#             */
+/*   Updated: 2024/12/02 18:12:40 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef DEFINE_H
+# define DEFINE_H
 
-#include "define.h"
-#include "typedef.h"
+# include "../libft/libft.h"
+# include "../mlx/mlx/mlx.h"
+# include <limits.h>
+# include <math.h>
+# include <stdio.h>
 
-int			init_args(int fd, t_args *args, t_map *map);
-int			check_newline(char *str);
-int			check_map(char **file, t_args *args, t_map *map);
-void		print_tab(char **tab);
-int			check_all(char **tab, int i, int j, int err);
+# define ERR "Map must be valid"
+# define FOV 66
+# define PI 3.1415926535
+# define CELL_SIZE 50
+# define WIN_HEIGHT 1080
+# define WIN_WIDTH 1920
 
 #endif
