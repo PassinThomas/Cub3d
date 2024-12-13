@@ -10,7 +10,13 @@ DIR_SRCS		=	srcs
 
 DIR_OBJS		=	objs
 
-SRCS_NAMES		=	main.c parsing/parse_file.c parsing/parsing_map.c parsing/parse_direction.c
+SRCS_NAMES		=	main.c \
+				    parsing/parse_file.c \
+				    parsing/parsing_map.c \
+					parsing/parse_direction.c \
+					exec/init_game.c \
+					exec/draw_pixel.c \
+					exec/key_log.c \
 
 
 OBJS_NAMES		=	${SRCS_NAMES:.c=.o}
@@ -70,6 +76,7 @@ $(OBJS) : $(DIR_OBJS)/%.o : $(DIR_SRCS)/%.c
 $(DIR_OBJS):
 	mkdir -p $(DIR_OBJS)
 	mkdir -p objs/parsing
+	mkdir -p objs/exec
 # mkdir -p objs/misc
 # mkdir -p objs/help
 # mkdir -p objs/game

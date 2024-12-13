@@ -6,7 +6,7 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 05:02:29 by emehdaou          #+#    #+#             */
-/*   Updated: 2024/12/02 18:24:08 by tpassin          ###   ########.fr       */
+/*   Updated: 2024/12/04 14:23:54 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,8 +144,7 @@ int	init_args(int fd, t_args *args, t_map *map)
 		return (1);
 	if (check_args(file, args, map))
 		return (free_tab(file), 2);
-	printf("\n");
-	print_tab(map->tab);
-	free_tab(file);
+	// free_tab(file);
     // print_struct(args);
+	return (0);
 }

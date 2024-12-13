@@ -6,7 +6,7 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 15:51:02 by tpassin           #+#    #+#             */
-/*   Updated: 2024/12/02 13:56:03 by tpassin          ###   ########.fr       */
+/*   Updated: 2024/12/10 14:07:28 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	check_right(char **tab, int i, int j)
 	{
 		if (tab[i][j] == '1')
 			return (1);
+		if (tab[i][j] != '0' && tab[i][j] != '1')
+			return (0);
 		j++;
 	}
 	return (0);
@@ -29,6 +31,8 @@ int	check_left(char **tab, int i, int j)
 	{
 		if (tab[i][j] == '1')
 			return (1);
+		if (tab[i][j] != '0' && tab[i][j] != '1')
+			return (0);
 		j--;
 	}
 	return (0);
@@ -42,6 +46,8 @@ int	check_down(char **tab, int i, int j, int height)
 			return (0);
 		if (tab[i][j] == '1')
 			return (1);
+		if (tab[i][j] != '0' && tab[i][j] != '1')
+			return (0);
 		i++;
 	}
 	return (0);
@@ -53,6 +59,8 @@ int	check_up(char **tab, int i, int j)
 	{
 		if (tab[i][j] == '1')
 			return (1);
+		if (tab[i][j] != '0' && tab[i][j] != '1')
+			return (0);
 		i--;
 	}
 	return (0);

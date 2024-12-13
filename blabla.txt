@@ -30,3 +30,13 @@ etape 3
 	-> stocker la map
 	-> tout mettre dans un rectangle rempli d'espace
 	// a suivre
+
+65361 gauche
+65363 droite
+65362 haut
+65364 bas
+97	  A
+100	  D
+119	  W
+115   S
+65307 ESC

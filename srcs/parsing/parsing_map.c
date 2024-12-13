@@ -37,9 +37,9 @@ void	get_index(t_map *map)
 		{
 			if (ft_strchr("NSEW", map->tab[i][j]))
 			{
-				map->player.y = i;
-				map->player.x = j;
-				map->player.face = ft_strchr("NSEW", map->tab[i][j])[0];
+				map->player.pos.y = i;
+				map->player.pos.x = j;
+				map->player.pos.face = ft_strchr("NSEW", map->tab[i][j])[0];
 				map->tab[i][j] = '0';
 			}
 			j++;
@@ -71,6 +71,8 @@ int	backtrack(t_map *map)
 				if (check_all(map->tab, i, j, map->height))
 					return (1);
 			}
+			if (map->tab[i][j] == ' ' || map->tab[i][j] == '\t')
+				map->tab[i][j] = '1';
 			j++;
 		}
 		i++;
@@ -100,7 +102,11 @@ int	check_map(char **file, t_args *args, t_map *map)
 	map->tab = file + 6;
 	i = 0;
 	while (map->tab[i])
+	{
+		if (map->width < ft_strlen(map->tab[i]))
+			map->width = ft_strlen(map->tab[i]);
 		i++;
+	}
 	map->height = i;
 	if (check_col(map))
 		return (ft_printf("Error check_col %i\n", 1));
