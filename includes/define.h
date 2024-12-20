@@ -6,7 +6,7 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 13:45:31 by tpassin           #+#    #+#             */
-/*   Updated: 2024/12/10 12:51:50 by tpassin          ###   ########.fr       */
+/*   Updated: 2024/12/19 17:15:53 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,6 @@
 // COLOR
 # define SALMON 0x00FFA07A
 # define RED 0x00FF0000
+# define BLACK 0x00000000
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 13:55:27 by tpassin           #+#    #+#             */
-/*   Updated: 2024/12/11 18:26:12 by tpassin          ###   ########.fr       */
+/*   Updated: 2024/12/20 14:03:22 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ int	run_game(t_map *map)
 {
 	int	i;
 	int	j;
+	t_vector2_d pts;
+	t_vector2_f dest;
 
 	i = 0;
 	while (map->tab[i])
@@ -117,6 +119,10 @@ int	run_game(t_map *map)
 	mlx_put_image_to_window(map->mlx, map->win, map->img, 0, 0);
 	bresenham(map, map->player.pos_x, map->player.pos_y, map->mouse_x,
 		map->mouse_y, 0xFFFFFF);
+	dest.x = (double)map->mouse_x;
+	dest.y = (double)map->mouse_y;
+	pts = dda(map, dest);
+	draw_loop(map, pts.x, pts.y, 6, RED);
 	return (0);
 }
 
@@ -156,6 +162,34 @@ void	map_realloc(t_map *map)
 	}
 }
 
+int init_map(t_map *map, char **tab)
+{
+	int x;
+	int y;
+
+	y = 0;
+	map->map = malloc(sizeof(int *) * (map->height));
+	if (!map->map)
+		return (1);
+	while (y < map->height)
+	{
+		map->map[y] = malloc(sizeof(int) * (map->width));
+		if (!map->map[y])
+			return (1);
+		x = 0;
+		while(x < map->width)
+		{
+			if (tab[y][x] == '1')
+				map->map[y][x] = 1;
+			else
+				map->map[y][x] = 0;
+			x++;
+		}
+		y++;
+	}
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	int		fd;
@@ -172,8 +206,8 @@ int	main(int argc, char **argv)
 	if (init_args(fd, &args, &map))
 		return (1);
 	// map_realloc(&map);
-	// printf("[%d][%d]\n", map.player.x, map.player.y);
-	// print_tab(map.tab);
+	if (init_map(&map, map.tab))
+		return (1);
 	start_game(&map);
 	free_all(&map);
 	close(fd);

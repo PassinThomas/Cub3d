@@ -6,7 +6,7 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 13:45:34 by tpassin           #+#    #+#             */
-/*   Updated: 2024/12/12 13:59:26 by tpassin          ###   ########.fr       */
+/*   Updated: 2024/12/20 15:08:31 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,26 +26,35 @@ typedef struct s_pos
 	char		face;
 }				t_pos;
 
-typedef struct s_vector2_f
+typedef struct s_vector2_i
 {
-	float		x;
-	float		y;
-}				t_vector2_f;
+	int	x;
+	int	y;
+}	t_vector2_i;
 
 typedef struct s_vector2_d
 {
-	int			x;
-	int			y;
-}				t_vector2_d;
+	double	x;
+	double	y;
+}	t_vector2_d;
 
-typedef struct t_ray
+typedef struct s_vector2_f
 {
-	t_vector2_f	hit_point;
+	float	x;
+	float	y;
+}	t_vector2_f;
+
+typedef struct s_ray
+{
+	t_vector2_d	hit_point;
 	t_vector2_d	cell;
-	double		length;
+	t_vector2_d	ori;
+	t_vector2_d	ray_dir;
+	double		len;
 	int			side_hit;
 	double		angle;
-}				t_ray;
+	double		perp_len;
+}	t_ray;
 
 typedef struct s_args
 {
@@ -69,12 +78,16 @@ typedef struct s_player
 typedef struct s_map
 {
 	char		**tab;
+	int			**map;
 	int			height;
 	int			width;
 	t_pos		pos;
 	t_pos		exit;
 	t_args		args;
 	t_player	player;
+	t_vector2_d d;
+	t_vector2_f f;
+	t_vector2_i i;
 	void		*mlx;
 	void		*win;
 	void		*img;

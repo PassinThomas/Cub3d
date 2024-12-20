@@ -17,6 +17,7 @@ SRCS_NAMES		=	main.c \
 					exec/init_game.c \
 					exec/draw_pixel.c \
 					exec/key_log.c \
+					exec/dda.c \
 
 
 OBJS_NAMES		=	${SRCS_NAMES:.c=.o}
