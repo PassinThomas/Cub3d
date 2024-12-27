@@ -6,7 +6,7 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 22:17:13 by tpassin           #+#    #+#             */
-/*   Updated: 2024/12/27 01:34:49 by tpassin          ###   ########.fr       */
+/*   Updated: 2024/12/27 20:50:16 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@ typedef struct s_args
 	char		*path[4];
 	int			floor[3];
 	int			celling[3];
+	int			north;
+	int			south;
+	int			east;
+	int			west;
 }				t_args;
 
 typedef struct s_camera
@@ -59,11 +63,19 @@ typedef struct s_ray
 
 typedef struct
 {
+	int			height;
+	int			width;
 	void		*img;
 	char		*addr;
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;
+	int			color;
+	double		wall_x;
+	int			tex_x;
+	int			tex_y;
+	double		step;
+	double		tex_pos;
 }				t_img;
 
 typedef struct s_map
@@ -78,6 +90,7 @@ typedef struct s_map
 	t_args		args;
 	t_camera	camera;
 	t_img		img;
+	t_img		text[4];
 	void		*mlx;
 	void		*win;
 	int			keyboard[256];

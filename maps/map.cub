@@ -1,7 +1,7 @@
-NO wool/black_wool.xpm
-SO      wool/yellow_wool.xpm
-WE                   wool/cyan_wool.xpm                         
-EA wool/red_wool.xpm
+NO ./textures/eagle.xpm
+SO      ./textures/bluestone.xpm
+WE                   ./textures/redbrick_1.xpm                         
+EA ./textures/wood.xpm
 F 42,98,61
 C 171,191,210
 111111111111111111111111

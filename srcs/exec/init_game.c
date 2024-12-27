@@ -6,7 +6,7 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 14:21:40 by tpassin           #+#    #+#             */
-/*   Updated: 2024/12/27 01:30:09 by tpassin          ###   ########.fr       */
+/*   Updated: 2024/12/27 17:04:59 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	player_pos(t_map *map)
 {
-	map->camera.pos.x = map->pos.x;
-	map->camera.pos.y = map->pos.y;
+	map->camera.pos.x = map->pos.x + 0.5;
+	map->camera.pos.y = map->pos.y + 0.5;
 }
 
 void	init_pos_player(t_map *map)
@@ -46,3 +46,4 @@ void	init_pos_player(t_map *map)
 		map->camera.plane.y = -0.66;
 	}
 }
+

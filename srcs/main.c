@@ -6,7 +6,7 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 13:55:27 by tpassin           #+#    #+#             */
-/*   Updated: 2024/12/27 02:21:56 by tpassin          ###   ########.fr       */
+/*   Updated: 2024/12/27 20:52:17 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,9 @@ int	**init_map(t_map *map)
 
 int	main(int argc, char **argv)
 {
-	int			fd;
-	t_map		map;
-	t_args		args;
+	int		fd;
+	t_map	map;
+	t_args	args;
 
 	ft_memset(&map, 0, sizeof(t_map));
 	fd = open(argv[1], O_RDWR);
@@ -99,8 +99,8 @@ int	main(int argc, char **argv)
 		return (ft_printf("Error fd\n"));
 	if (init_args(fd, &args, &map))
 		return (1);
+	map.args = args;
 	start_game(&map);
-	// free_all(&map);
 	close(fd);
 	return (0);
 }

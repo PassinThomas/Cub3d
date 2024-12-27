@@ -6,7 +6,7 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 13:45:31 by tpassin           #+#    #+#             */
-/*   Updated: 2024/12/27 00:01:55 by tpassin          ###   ########.fr       */
+/*   Updated: 2024/12/27 18:22:32 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@
 # define WIN_WIDTH 1920
 # define MOVE_SPEED 0.05f
 # define ROT_SPEED 0.03f
+# define TEXTURE_WIDTH 64
+# define TEXTURE_HEIGHT 64
 
 // KEY
 # define KEY_A 97

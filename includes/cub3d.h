@@ -6,7 +6,7 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 19:01:43 by akasekai          #+#    #+#             */
-/*   Updated: 2024/12/27 01:52:16 by tpassin          ###   ########.fr       */
+/*   Updated: 2024/12/27 20:34:22 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int		key_press(int keycode, t_map *map);
 int		my_mlx_pixel_put(t_img *img, int x, int y, int color);
 int		key_release(int keycode, t_map *map);
 int		**init_map(t_map *map);
+int		init_data(t_map *map);
 void	print_struct(t_args *args);
 void	render(t_map *map);
 void	print_tab(char **tab);
@@ -31,7 +32,7 @@ void	init_pos_player(t_map *map);
 void	calcul_ray(t_map *map, t_ray *ray, int x);
 void	calcul_step(t_ray *ray, t_map *map);
 void	dda(t_map *map, t_ray *ray);
-void	draw_vert_line(t_img *img, int x, t_ray ray);
+void	draw_vert_line(t_img *img, int x, t_ray ray, t_map *map);
 void	free_tab(char **tab);
 void	free_all(t_map *map);
 void	handle_movement(t_map *map);
@@ -39,5 +40,7 @@ void	rotate_left(t_map *map);
 void	rotate_right(t_map *map);
 void	ft_close_window(t_map *map);
 void	start_game(t_map *map);
+int		get_texture_color(t_img *text, int x, int y);
+void	draw_floor_ceiling(t_img *img, t_map *map);
 
 #endif
