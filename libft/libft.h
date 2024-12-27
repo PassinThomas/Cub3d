@@ -6,7 +6,7 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 17:35:41 by emehdaou          #+#    #+#             */
-/*   Updated: 2024/12/04 15:05:56 by tpassin          ###   ########.fr       */
+/*   Updated: 2024/12/26 23:20:08 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ size_t					ft_strlcat(char *dst, const char *src, size_t dstsize);
 size_t					ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t					ft_strlen(const char *str);
 size_t					len_tab(char **tab);
+char					*ft_strcpy(char *dest, const char *src);
 char					*ft_strchr(char const *s, int c);
 char					*ft_strrchr(char const *s, int c);
 int						ft_strncmp(const char *s1, const char *s2, size_t n);

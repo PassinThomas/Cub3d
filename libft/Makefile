@@ -6,7 +6,7 @@
 #    By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/24 20:15:20 by emehdaou          #+#    #+#              #
-#    Updated: 2024/12/04 15:06:01 by tpassin          ###   ########.fr        #
+#    Updated: 2024/12/26 23:19:26 by tpassin          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,7 @@ ft_strrchr.c \
 ft_strtrim.c \
 ft_substr.c \
 ft_strmapi.c \
+ft_strcpy.c \
 ft_strlcpy.c \
 ft_strlcat.c \
 ft_bzero.c \

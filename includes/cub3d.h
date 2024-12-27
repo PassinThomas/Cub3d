@@ -6,7 +6,7 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 19:01:43 by akasekai          #+#    #+#             */
-/*   Updated: 2024/12/19 16:24:01 by tpassin          ###   ########.fr       */
+/*   Updated: 2024/12/27 01:52:16 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,28 @@
 # include "define.h"
 # include "typedef.h"
 
-int			init_args(int fd, t_args *args, t_map *map);
-int			check_newline(char *str);
-int			check_map(char **file, t_args *args, t_map *map);
-void		print_tab(char **tab);
-int			check_all(char **tab, int i, int j, int err);
-void		init_pos_player(t_map *map);
-void		draw_loop(t_map *map, int x, int y, int size, int color);
-int			key_press(int keycode, t_map *map);
-void		draw_loop(t_map *map, int x, int y, int size, int color);
-t_vector2_d	dda(t_map *data, t_vector2_f dest);
+int		init_args(int fd, t_args *args, t_map *map);
+int		check_newline(char *str);
+int		check_map(char **file, t_args *args, t_map *map);
+int		check_all(char **tab, int i, int j, int err);
+int		key_press(int keycode, t_map *map);
+int		my_mlx_pixel_put(t_img *img, int x, int y, int color);
+int		key_release(int keycode, t_map *map);
+int		**init_map(t_map *map);
+void	print_struct(t_args *args);
+void	render(t_map *map);
+void	print_tab(char **tab);
+void	init_pos_player(t_map *map);
+void	calcul_ray(t_map *map, t_ray *ray, int x);
+void	calcul_step(t_ray *ray, t_map *map);
+void	dda(t_map *map, t_ray *ray);
+void	draw_vert_line(t_img *img, int x, t_ray ray);
+void	free_tab(char **tab);
+void	free_all(t_map *map);
+void	handle_movement(t_map *map);
+void	rotate_left(t_map *map);
+void	rotate_right(t_map *map);
+void	ft_close_window(t_map *map);
+void	start_game(t_map *map);
 
 #endif

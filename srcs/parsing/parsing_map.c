@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_map.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/27 00:03:52 by tpassin           #+#    #+#             */
+/*   Updated: 2024/12/27 01:17:21 by tpassin          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
 int	check_col(t_map *map)
@@ -37,9 +49,9 @@ void	get_index(t_map *map)
 		{
 			if (ft_strchr("NSEW", map->tab[i][j]))
 			{
-				map->player.pos.y = i;
-				map->player.pos.x = j;
-				map->player.pos.face = ft_strchr("NSEW", map->tab[i][j])[0];
+				map->pos.y = i;
+				map->pos.x = j;
+				map->pos.face = ft_strchr("NSEW", map->tab[i][j])[0];
 				map->tab[i][j] = '0';
 			}
 			j++;
@@ -47,19 +59,12 @@ void	get_index(t_map *map)
 		i++;
 	}
 }
-void	print_tab(char **tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i])
-		printf("%s\n", tab[i++]);
-}
 
 int	backtrack(t_map *map)
 {
 	int	i;
 	int	j;
+
 	i = 0;
 	while (map->tab[i])
 	{

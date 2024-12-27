@@ -1,14 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycasting.c                                       :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/25 13:14:57 by tpassin           #+#    #+#             */
-/*   Updated: 2024/11/25 13:16:18 by tpassin          ###   ########.fr       */
+/*   Created: 2024/12/26 23:18:51 by tpassin           #+#    #+#             */
+/*   Updated: 2024/12/26 23:19:00 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+char	*ft_strcpy(char *dest, const char *src)
+{
+	int	i;
 
+	i = 0;
+	while (src[i])
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
+}

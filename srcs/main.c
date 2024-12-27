@@ -6,24 +6,39 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 13:55:27 by tpassin           #+#    #+#             */
-/*   Updated: 2024/12/20 14:03:22 by tpassin          ###   ########.fr       */
+/*   Updated: 2024/12/27 02:21:56 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-char	*ft_strcpy(char *dest, const char *src)
+void	free_int_tab(int **tab, int height)
 {
 	int	i;
 
 	i = 0;
-	while (src[i])
+	while (i < height)
 	{
-		dest[i] = src[i];
+		free(tab[i]);
 		i++;
 	}
-	dest[i] = '\0';
-	return (dest);
+	free(tab);
+}
+
+void	ft_close_window(t_map *map)
+{
+	if (map->img.img)
+		mlx_destroy_image(map->mlx, map->img.img);
+	if (map->win)
+		mlx_destroy_window(map->mlx, map->win);
+	if (map->mlx)
+	{
+		mlx_destroy_display(map->mlx);
+		free(map->mlx);
+	}
+	if (map->file)
+		free_tab(map->file);
+	exit(0);
 }
 
 void	free_all(t_map *map)
@@ -31,7 +46,7 @@ void	free_all(t_map *map)
 	int	i;
 
 	i = 0;
-	if (map->args.path)
+	if (map->args.path && map->args.path[i])
 	{
 		while (i < 4)
 		{
@@ -40,176 +55,52 @@ void	free_all(t_map *map)
 			i++;
 		}
 	}
-	free_tab(map->tab);
+	free_int_tab(map->map, map->height);
 }
 
-int	ft_close_window(t_map *map)
+int	**init_map(t_map *map)
 {
-	mlx_destroy_window(map->mlx, map->win);
-	free(map->mlx);
-	exit(0);
-}
-
-void	bresenham(t_map *data, int x1, int y1, int x2, int y2, int color)
-{
-	int	dx;
-	int	dy;
-	int	sx;
-	int	sy;
-	int	err;
-	int	e2;
-
-	dx = abs(x2 - x1);
-	dy = abs(y2 - y1);
-	sx = (x1 < x2) ? 1 : -1;
-	sy = (y1 < y2) ? 1 : -1;
-	err = dx - dy;
-	while (1)
-	{
-		mlx_pixel_put(data->mlx, data->win, x1, y1, color);
-		if (x1 == x2 && y1 == y2)
-			break ;
-		e2 = err * 2;
-		if (e2 > -dy)
-		{
-			err -= dy;
-			x1 += sx;
-		}
-		if (e2 < dx)
-		{
-			err += dx;
-			y1 += sy;
-		}
-	}
-}
-
-// Fonction qui sera appelée à chaque mouvement de souris
-int	mouse_move(int x, int y, t_map *map)
-{
-	map->mouse_x = x;
-	map->mouse_y = y;
-	// Effacer l'écran en redessinant l'arrière-plan
-	// Tracer la ligne du joueur vers la position de la souris
-	// Blanc
-	// Mettre à jour la position du joueur si nécessaire
-	// (cela peut être ajusté selon l'implémentation de la position du joueur)
-	return (0);
-}
-
-int	run_game(t_map *map)
-{
-	int	i;
-	int	j;
-	t_vector2_d pts;
-	t_vector2_f dest;
-
-	i = 0;
-	while (map->tab[i])
-	{
-		j = 0;
-		while (map->tab[i][j])
-		{
-			if (map->tab[i][j] == '1')
-				draw_loop(map, j * CELL, i * CELL, CELL, SALMON);
-			j++;
-		}
-		i++;
-	}
-	draw_loop(map, map->player.pos_x, map->player.pos_y, 3, RED);
-	mlx_put_image_to_window(map->mlx, map->win, map->img, 0, 0);
-	bresenham(map, map->player.pos_x, map->player.pos_y, map->mouse_x,
-		map->mouse_y, 0xFFFFFF);
-	dest.x = (double)map->mouse_x;
-	dest.y = (double)map->mouse_y;
-	pts = dda(map, dest);
-	draw_loop(map, pts.x, pts.y, 6, RED);
-	return (0);
-}
-
-void	start_game(t_map *map)
-{
-	init_pos_player(map);
-	map->mlx = mlx_init();
-	map->win = mlx_new_window(map->mlx, WIN_WIDTH, WIN_HEIGHT, "Cub3d");
-	map->img = mlx_new_image(map->mlx, WIN_WIDTH, WIN_HEIGHT);
-	map->addr = mlx_get_data_addr(map->img, &map->bits_per_pixel,
-			&map->line_length, &map->endian);
-	mlx_loop_hook(map->mlx, run_game, map);
-	mlx_hook(map->win, 6, 1L << 6, mouse_move, map);
-	mlx_loop(map->mlx);
-}
-
-void	map_realloc(t_map *map)
-{
-	char	*new;
-	int		len;
-	int		i;
-
-	i = 0;
-	while (map->tab[i])
-	{
-		len = ft_strlen(map->tab[i]);
-		if (len < map->width)
-		{
-			new = malloc(map->width + 1);
-			ft_strcpy(new, map->tab[i]);
-			ft_memset(new + len, '1', map->width - len);
-			new[map->width] = '\0';
-			free(map->tab[i]);
-			map->tab[i] = new;
-		}
-		i++;
-	}
-}
-
-int init_map(t_map *map, char **tab)
-{
-	int x;
-	int y;
+	int	x;
+	int	y;
+	int	**new;
 
 	y = 0;
-	map->map = malloc(sizeof(int *) * (map->height));
-	if (!map->map)
-		return (1);
+	new = malloc(sizeof(int *) * map->height);
+	if (!new)
+		return (NULL);
 	while (y < map->height)
 	{
-		map->map[y] = malloc(sizeof(int) * (map->width));
-		if (!map->map[y])
-			return (1);
+		new[y] = malloc(sizeof(int) * map->width);
+		if (!new[y])
+			return (NULL);
 		x = 0;
-		while(x < map->width)
+		while (x < map->width)
 		{
-			if (tab[y][x] == '1')
-				map->map[y][x] = 1;
+			if (map->file[y + 6][x] == '1')
+				new[y][x] = 1;
 			else
-				map->map[y][x] = 0;
+				new[y][x] = 0;
 			x++;
 		}
 		y++;
 	}
-	return (0);
+	return (new);
 }
 
 int	main(int argc, char **argv)
 {
-	int		fd;
-	t_map	map;
-	t_args	args;
-	int		i;
+	int			fd;
+	t_map		map;
+	t_args		args;
 
 	ft_memset(&map, 0, sizeof(t_map));
-	// if (argc == 3)
-	//     tobmp();
 	fd = open(argv[1], O_RDWR);
 	if (fd == -1)
 		return (ft_printf("Error fd\n"));
 	if (init_args(fd, &args, &map))
 		return (1);
-	// map_realloc(&map);
-	if (init_map(&map, map.tab))
-		return (1);
 	start_game(&map);
-	free_all(&map);
+	// free_all(&map);
 	close(fd);
 	return (0);
 }

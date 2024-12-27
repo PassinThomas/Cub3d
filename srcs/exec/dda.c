@@ -6,66 +6,95 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:05:14 by tpassin           #+#    #+#             */
-/*   Updated: 2024/12/20 15:13:49 by tpassin          ###   ########.fr       */
+/*   Updated: 2024/12/26 23:13:12 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-t_vector2_d dda(t_map *data, t_ray *ray)
+void	calcul_ray(t_map *map, t_ray *ray, int x)
 {
-  ray->ray_dir = ray->hit_point;
-  ray->ori.x = data->player.pos_x;
-  ray->ori.y = data->player.pos_y;
-  t_vector2_f side_dist; // Origin point offset to the nearest int positon
-  t_vector2_f delta_dist; // Length of the hyptenuse
+	double	camera;
 
-  delta_dist.x = (ray->ray_dir.x == 0) ? 1e30 : fabs(1.0f / ray->ray_dir.x); // 1e30 is a large value
-  delta_dist.y = (ray->ray_dir.x == 0) ? 1e30 : fabs(1.0f / ray->ray_dir.y);
+	camera = 2 * x / (double)WIN_WIDTH - 1;
+	ray->raydir.x = map->camera.dir.x + map->camera.plane.x * camera;
+	ray->raydir.y = map->camera.dir.y + map->camera.plane.y * camera;
+}
 
-  t_vector2_d step;
-  if (ray->ray_dir.x < 0)
-  {
-    step.x = -1; // Calculating X step (depending on the direction)
-    side_dist.x = (ray->ori.x - map.x) * delta_dist.x; // Calculating X gap to the nearest integer coordinate
-  }
-  else
-  {
-    step.x = 1;
-    side_dist.x = (map.x + 1.0f - origin.x) * delta_dist.x;
-  }
+void	init_ray_delta(t_ray *ray, t_map *map)
+{
+	ray->mapx = (int)map->camera.pos.x;
+	ray->mapy = (int)map->camera.pos.y;
+	if (ray->raydir.x == 0)
+		ray->deltaDist.x = 1e30;
+	else
+		ray->deltaDist.x = fabs(1 / ray->raydir.x);
+	if (ray->raydir.y == 0)
+		ray->deltaDist.y = 1e30;
+	else
+		ray->deltaDist.y = fabs(1 / ray->raydir.y);
+	ray->mapx = (int)map->camera.pos.x;
+	ray->mapy = (int)map->camera.pos.y;
+	if (ray->raydir.x == 0)
+		ray->deltaDist.x = 1e30;
+	else
+		ray->deltaDist.x = fabs(1 / ray->raydir.x);
+	if (ray->raydir.y == 0)
+		ray->deltaDist.y = 1e30;
+	else
+		ray->deltaDist.y = fabs(1 / ray->raydir.y);
+}
 
-  if (dir.y < 0)
-  {
-    step.y = -1; // Calculating Y step (depending on the direction)
-    side_dist.y = (origin.y - map.y) * delta_dist.y; // Calculating Y gap to the nearest integer coordinate
-  }
-  else
-  {
-    step.y = 1;
-    side_dist.y = (map.y + 1.0f - origin.y) * delta_dist.y;
-  }
-  while (1)
-  {
-    if (side_dist.x < side_dist.y)
-    {
-        side_dist.x += delta_dist.x;
-        map.x += step.x;
-    }
-    else
-    {
-        side_dist.y += delta_dist.y;
-        map.y += step.y;
-    }
-  // Converting pixel coordinates to tab coordinates
-    t_vector2_i cell = {map.x / CELL, map.y / CELL};
-    if (cell.x < 0 || cell.x >= data->width)
-      continue;
-    if (cell.y < 0 || cell.y >= data->height)
-      continue;
-    if (data->map[cell.y][cell.x] == 1) // Is a wall
-    {
-      return (map);
-    }
-  }
+void	calcul_step(t_ray *ray, t_map *map)
+{
+	init_ray_delta(ray, map);
+	if (ray->raydir.x < 0)
+	{
+		ray->stepx = -1;
+		ray->sidedist.x = (map->camera.pos.x - ray->mapx) * ray->deltaDist.x;
+	}
+	else
+	{
+		ray->stepx = 1;
+		ray->sidedist.x = (ray->mapx + 1.0 - map->camera.pos.x)
+			* ray->deltaDist.x;
+	}
+	if (ray->raydir.y < 0)
+	{
+		ray->stepy = -1;
+		ray->sidedist.y = (map->camera.pos.y - ray->mapy) * ray->deltaDist.y;
+	}
+	else
+	{
+		ray->stepy = 1;
+		ray->sidedist.y = (ray->mapy + 1.0 - map->camera.pos.y)
+			* ray->deltaDist.y;
+	}
+}
+
+void	dda(t_map *map, t_ray *ray)
+{
+	int	hit;
+
+	hit = 0;
+	while (hit == 0)
+	{
+		if (ray->sidedist.x < ray->sidedist.y)
+		{
+			ray->sidedist.x += ray->deltaDist.x;
+			ray->mapx += ray->stepx;
+			ray->side = 0;
+		}
+		else
+		{
+			ray->sidedist.y += ray->deltaDist.y;
+			ray->mapy += ray->stepy;
+			ray->side = 1;
+		}
+		if (map->map[ray->mapy][ray->mapx] == 1)
+		{
+			hit = 1;
+			break ;
+		}
+	}
 }
