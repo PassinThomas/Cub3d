@@ -23,6 +23,7 @@ SRCS_NAMES		=	main.c \
 					exec/movement.c\
 					exec/game.c\
 					exec/textures.c\
+					exec/draw_minimap.c\
 					
 
 OBJS_NAMES		=	${SRCS_NAMES:.c=.o}

@@ -6,7 +6,7 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 13:55:27 by tpassin           #+#    #+#             */
-/*   Updated: 2024/12/27 20:52:17 by tpassin          ###   ########.fr       */
+/*   Updated: 2024/12/30 17:14:48 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	free_int_tab(int **tab, int height)
 
 void	ft_close_window(t_map *map)
 {
+	free_text(map);
 	if (map->img.img)
 		mlx_destroy_image(map->mlx, map->img.img);
 	if (map->win)
@@ -38,6 +39,7 @@ void	ft_close_window(t_map *map)
 	}
 	if (map->file)
 		free_tab(map->file);
+	free_all(map);
 	exit(0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:36:38 by tpassin           #+#    #+#             */
-/*   Updated: 2024/12/27 00:55:45 by tpassin          ###   ########.fr       */
+/*   Updated: 2024/12/30 17:03:52 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,7 @@ int	key_press(int keycode, t_map *map)
 	if (keycode == RIGHT)
 		map->right_pressed = true;
 	if (keycode == ESC)
-	{
-		free_all(map);
 		ft_close_window(map);
-	}
 	return (0);
 }
 

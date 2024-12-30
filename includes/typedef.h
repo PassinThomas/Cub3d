@@ -6,7 +6,7 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 22:17:13 by tpassin           #+#    #+#             */
-/*   Updated: 2024/12/27 20:50:16 by tpassin          ###   ########.fr       */
+/*   Updated: 2024/12/30 16:50:31 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_ray
 
 typedef struct
 {
+	int			player;
 	int			height;
 	int			width;
 	void		*img;
@@ -71,9 +72,9 @@ typedef struct
 	int			line_length;
 	int			endian;
 	int			color;
-	double		wall_x;
 	int			tex_x;
 	int			tex_y;
+	double		wall_x;
 	double		step;
 	double		tex_pos;
 }				t_img;

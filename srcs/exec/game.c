@@ -6,7 +6,7 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 01:25:22 by tpassin           #+#    #+#             */
-/*   Updated: 2024/12/27 17:57:26 by tpassin          ###   ########.fr       */
+/*   Updated: 2024/12/30 17:12:01 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	start_game(t_map *map)
 	init_pos_player(map);
 	mlx_hook(map->win, 2, 1L << 0, key_press, map);
 	mlx_hook(map->win, 3, 1L << 1, key_release, map);
+	mlx_hook(map->win, 17, 0, ft_close_window, map);
 	mlx_loop_hook(map->mlx, main_loop, map);
 	mlx_loop(map->mlx);
 }

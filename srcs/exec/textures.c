@@ -6,7 +6,7 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 15:40:36 by tpassin           #+#    #+#             */
-/*   Updated: 2024/12/27 18:57:33 by tpassin          ###   ########.fr       */
+/*   Updated: 2024/12/30 16:53:38 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,17 @@ int	init_data(t_map *map)
 	if (load_text(map, &map->text[3], map->args.path[3]))
 		return (1);
 	return (0);
+}
+
+void	free_text(t_map *map)
+{
+	int	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		if (map->text[i].img)
+			mlx_destroy_image(map->mlx, map->text[i].img);
+		i++;
+	}
 }

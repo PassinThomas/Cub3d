@@ -6,7 +6,7 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 14:21:40 by tpassin           #+#    #+#             */
-/*   Updated: 2024/12/27 17:04:59 by tpassin          ###   ########.fr       */
+/*   Updated: 2024/12/30 16:56:48 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,3 @@ void	init_pos_player(t_map *map)
 		map->camera.plane.y = -0.66;
 	}
 }
-

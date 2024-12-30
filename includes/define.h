@@ -6,7 +6,7 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 13:45:31 by tpassin           #+#    #+#             */
-/*   Updated: 2024/12/27 18:22:32 by tpassin          ###   ########.fr       */
+/*   Updated: 2024/12/30 15:40:31 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@
 # define ROT_SPEED 0.03f
 # define TEXTURE_WIDTH 64
 # define TEXTURE_HEIGHT 64
+# define SIZE_PLAYER 3
+# define MINIMAP_SCALE 5
 
 // KEY
 # define KEY_A 97
