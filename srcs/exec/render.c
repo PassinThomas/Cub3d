@@ -6,7 +6,7 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 17:22:54 by tpassin           #+#    #+#             */
-/*   Updated: 2024/12/30 16:41:32 by tpassin          ###   ########.fr       */
+/*   Updated: 2024/12/30 17:39:55 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ double	calculate_perp_wall_dist(t_ray ray, t_map *map)
 
 void	draw_vert_line(t_img *img, int x, t_ray ray, t_map *map)
 {
-	int		y;
 	t_img	*texture;
 
 	if (ray.start < 0)
@@ -63,16 +62,19 @@ void	draw_vert_line(t_img *img, int x, t_ray ray, t_map *map)
 	map->text->step = (double)TEXTURE_HEIGHT / ray.lineheight;
 	map->text->tex_pos = (ray.start - WIN_HEIGHT / 2 + ray.lineheight / 2)
 		* map->text->step;
-	y = ray.start;
-	while (y <= ray.end)
+	map->y = ray.start;
+	while (map->y <= ray.end)
 	{
-		map->text->tex_y = (int)map->text->tex_pos & (TEXTURE_HEIGHT - 1);
+		if (map->text->tex_pos >= TEXTURE_HEIGHT)
+			map->text->tex_y = (int)(map->text->tex_pos) % TEXTURE_HEIGHT;
+		else
+			map->text->tex_y = (int)(map->text->tex_pos);
 		map->text->tex_pos += map->text->step;
 		map->text->color = get_texture_color(texture, map->text->tex_x,
 				map->text->tex_y);
-		if (my_mlx_pixel_put(img, x, y, map->text->color))
+		if (my_mlx_pixel_put(img, x, map->y, map->text->color))
 			return ;
-		y++;
+		map->y++;
 	}
 }
 

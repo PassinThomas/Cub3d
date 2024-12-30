@@ -6,7 +6,7 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 22:17:13 by tpassin           #+#    #+#             */
-/*   Updated: 2024/12/30 16:50:31 by tpassin          ###   ########.fr       */
+/*   Updated: 2024/12/30 17:39:21 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ typedef struct s_map
 	int			**map;
 	int			height;
 	int			width;
+	int			y;
 	t_pos		pos;
 	t_pos		exit;
 	t_args		args;
