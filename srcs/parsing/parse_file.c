@@ -69,17 +69,19 @@ int	check_rgb(char *str, t_args *args, int index)
 		return (free_tab(tab), ft_printf("Error taille Floor/Celling\n"), 1);
 	if ((ft_strcmp(tab[0], "F") || index != 4) && (ft_strcmp(tab[0], "C")
 			|| index != 5))
-		return (ft_printf("Error Floor/Celling\n"), 2);
+		return (free_tab(tab), ft_printf("Error Floor/Celling\n"), 2);
 	rgb = ft_split(tab[1], ',');
 	if (len_tab(rgb) != 3)
 		return (free_tab(rgb), free_tab(tab),
-			ft_printf("Error taille Floor/Celling\n"), 1);
+		ft_printf("Error taille Floor/Celling\n"), 1);
 	if (store_rgb(rgb, args, index))
 		return (ft_printf("Error rgb\n"), free_tab(rgb), free_tab(tab), free_path(args), 4);
 	free_tab(tab);
 	free_tab(rgb);
 	return (0);
 }
+
+
 
 int	check_args(char **file, t_args *args, t_map *map)
 {
@@ -114,10 +116,7 @@ int	init_args(int fd, t_args *args, t_map *map)
 
 	str = recup_gnl(fd);
 	if (!close(fd) || !str)
-		return (ft_printf("Error\n%s\n", ERR), free(str), 0);
-	// printf("str = %s\n", str);
-	// if (check_newline(str))
-	// 	return (printf("Error double newline\n"), free(str), 3);
+		return (ft_printf("Error\n%s\n", ERR), 1);
 	map->file = ft_split(str, '\n');
 	free(str);
 	if (!map->file)

@@ -60,6 +60,28 @@ void	get_index(t_map *map)
 	}
 }
 
+int check_wall(char **tab)
+{
+	int i;
+	int j;
+
+	j = 0;
+	i = 0;
+	while(tab[i])
+	{
+		j = 0;
+		while(tab[i][j])
+		{
+			if (tab[i][j] == '0')
+				if (is_border(tab, i, j))
+					return (1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
 int	backtrack(t_map *map)
 {
 	int	i;
@@ -73,7 +95,7 @@ int	backtrack(t_map *map)
 		{
 			if (map->tab[i][j] == '0')
 			{
-				if (check_all(map->tab, i, j, map->height))
+				if (check_wall(map->tab))
 					return (1);
 			}
 			if (map->tab[i][j] == ' ' || map->tab[i][j] == '\t')
@@ -84,6 +106,8 @@ int	backtrack(t_map *map)
 	}
 	return (0);
 }
+
+
 
 int	check_newline(char *str)
 {

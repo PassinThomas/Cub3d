@@ -105,7 +105,7 @@ char	*recup_gnl(int fd)
 			break ;
 		while (tmp[++i])
 			if (!ft_isprint(tmp[i]) && tmp[i] != '\n' && tmp[i] != '\0')
-				return (free(tmp), get_next_line(13, 1), NULL);
+				return (free(str), free(tmp), get_next_line(13, 1), NULL);
 		str = ft_strjoin(str, tmp);
 		if (!str)
 			return (free(str), NULL);

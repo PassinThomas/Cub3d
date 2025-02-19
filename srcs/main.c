@@ -76,7 +76,7 @@ int	**init_map(t_map *map)
 		if (!new[y])
 			return (NULL);
 		x = 0;
-		while (x < map->width)
+		while (map->file[y + 6][x] && x < map->width)
 		{
 			if (map->file[y + 6][x] == '1')
 				new[y][x] = 1;
