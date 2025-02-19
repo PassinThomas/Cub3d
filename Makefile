@@ -13,7 +13,6 @@ DIR_OBJS		=	objs
 SRCS_NAMES		=	main.c \
 				    parsing/parse_file.c \
 				    parsing/parsing_map.c \
-					parsing/parse_direction.c \
 					parsing/utils.c \
 					exec/init_game.c \
 					exec/draw_pixel.c \

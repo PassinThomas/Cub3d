@@ -98,6 +98,8 @@ int	main(int argc, char **argv)
 	ft_memset(&map, 0, sizeof(t_map));
 	if (argc != 2)
 		return (ft_printf("Error args\n"), 1);
+	if (!is_cub(argv[1]))
+		return (printf("Error extension\n"), 1);
 	fd = open(argv[1], O_RDWR);
 	if (fd == -1)
 		return (ft_printf("Error fd\n"), 1);

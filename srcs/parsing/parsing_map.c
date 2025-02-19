@@ -60,17 +60,17 @@ void	get_index(t_map *map)
 	}
 }
 
-int check_wall(char **tab)
+int	check_wall(char **tab)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	j = 0;
 	i = 0;
-	while(tab[i])
+	while (tab[i])
 	{
 		j = 0;
-		while(tab[i][j])
+		while (tab[i][j])
 		{
 			if (tab[i][j] == '0')
 				if (is_border(tab, i, j))
@@ -107,22 +107,6 @@ int	backtrack(t_map *map)
 	return (0);
 }
 
-
-
-int	check_newline(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i + 1] && str[i] == '\n' && str[i + 1] == '\n')
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
 int	check_map(char **file, t_args *args, t_map *map)
 {
 	int	i;
@@ -141,9 +125,6 @@ int	check_map(char **file, t_args *args, t_map *map)
 		return (ft_printf("Error check_col %i\n", 1));
 	get_index(map);
 	if (backtrack(map))
-	{
-		free_path(args);
-		return (ft_printf("Error backtrack\n"), 1);
-	}
+		return (free_path(args), ft_printf("Error backtrack\n"), 1);
 	return (0);
 }

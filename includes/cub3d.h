@@ -19,7 +19,6 @@
 int		init_args(int fd, t_args *args, t_map *map);
 int		check_newline(char *str);
 int		check_map(char **file, t_args *args, t_map *map);
-int		check_all(char **tab, int i, int j, int err);
 int		key_press(int keycode, t_map *map);
 int		my_mlx_pixel_put(t_img *img, int x, int y, int color);
 int		key_release(int keycode, t_map *map);
@@ -45,5 +44,7 @@ void	draw_floor_ceiling(t_img *img, t_map *map);
 void	draw_minimap(t_map *map);
 void	free_text(t_map *map);
 void	free_path(t_args *args);
-
+int		is_border(char **tab, int i, int j);
+int		is_cub(char *str);
+    
 #endif

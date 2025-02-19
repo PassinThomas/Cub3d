@@ -12,19 +12,20 @@
 
 #include "../../includes/cub3d.h"
 
-int is_border(char **tab, int i, int j)
+int	is_border(char **tab, int i, int j)
 {
-    int size;
+	int	size;
 
 	size = 0;
-    while(tab[size])
-        size++;
-    if ((i == size - 1 || tab[i + 1][j] == '\0' || tab[i + 1][j] == '\n') || (!tab[i][j + 1] || tab[i][j + 1] == '\n') || (!tab[i - 1][j] || tab[i - 1][j] == ' ' || i == 0) || (j == 0 || !tab[i][j - 1] || tab[i][j - 1] == ' '))
-        return (1);
-    return (0);
-
+	while (tab[size])
+		size++;
+	if ((i == size - 1 || tab[i + 1][j] == '\0' || tab[i + 1][j] == '\n')
+		|| (!tab[i][j + 1] || tab[i][j + 1] == '\n') || (!tab[i - 1][j] || tab[i
+			- 1][j] == ' ' || i == 0) || (j == 0 || !tab[i][j - 1] || tab[i][j
+			- 1] == ' '))
+		return (1);
+	return (0);
 }
-
 
 void	map_realloc(t_map *map)
 {
@@ -49,33 +50,45 @@ void	map_realloc(t_map *map)
 	}
 }
 
-void	print_tab(char **tab)
+int	is_cub(char *str)
 {
-	int	i;
+	int	size;
 
-	i = 0;
-	while (tab[i])
-		printf("%s\n", tab[i++]);
+	size = ft_strlen(str);
+	if (size < 4)
+		return (0);
+	if (ft_strcmp(".cub", &str[size - 4]))
+		return (0);
+	return (1);
 }
 
-void	print_struct(t_args *args)
-{
-	int	i;
+// void	print_tab(char **tab)
+// {
+// 	int	i;
 
-	i = 0;
-	while (i < 4)
-	{
-		printf("args->path[%i] = %s\n", i, args->path[i]);
-		i++;
-	}
-	i = 0;
-	while (i < 3)
-	{
-		printf("floor[%i] == %i\n", i, args->floor[i]);
-		printf("celling[%i] == %i\n", i, args->celling[i]);
-		i++;
-	}
-}
+// 	i = 0;
+// 	while (tab[i])
+// 		printf("%s\n", tab[i++]);
+// }
+
+// void	print_struct(t_args *args)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (i < 4)
+// 	{
+// 		printf("args->path[%i] = %s\n", i, args->path[i]);
+// 		i++;
+// 	}
+// 	i = 0;
+// 	while (i < 3)
+// 	{
+// 		printf("floor[%i] == %i\n", i, args->floor[i]);
+// 		printf("celling[%i] == %i\n", i, args->celling[i]);
+// 		i++;
+// 	}
+// }
 
 void	free_path(t_args *args)
 {

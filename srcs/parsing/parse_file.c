@@ -73,15 +73,14 @@ int	check_rgb(char *str, t_args *args, int index)
 	rgb = ft_split(tab[1], ',');
 	if (len_tab(rgb) != 3)
 		return (free_tab(rgb), free_tab(tab),
-		ft_printf("Error taille Floor/Celling\n"), 1);
+			ft_printf("Error taille Floor/Celling\n"), 1);
 	if (store_rgb(rgb, args, index))
-		return (ft_printf("Error rgb\n"), free_tab(rgb), free_tab(tab), free_path(args), 4);
+		return (ft_printf("Error rgb\n"), free_tab(rgb), free_tab(tab),
+			free_path(args), 4);
 	free_tab(tab);
 	free_tab(rgb);
 	return (0);
 }
-
-
 
 int	check_args(char **file, t_args *args, t_map *map)
 {
@@ -123,7 +122,5 @@ int	init_args(int fd, t_args *args, t_map *map)
 		return (1);
 	if (check_args(map->file, args, map))
 		return (free_tab(map->file), 2);
-	// free_tab(file);
-	// print_struct(args);
 	return (0);
 }
