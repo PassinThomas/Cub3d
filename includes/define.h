@@ -6,7 +6,7 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 13:45:31 by tpassin           #+#    #+#             */
-/*   Updated: 2024/12/30 15:40:31 by tpassin          ###   ########.fr       */
+/*   Updated: 2025/02/19 15:01:40 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,14 @@
 # define CELL 40
 # define WIN_HEIGHT 1080
 # define WIN_WIDTH 1920
-# define MOVE_SPEED 0.05f
-# define ROT_SPEED 0.03f
+# define MOVE_SPEED 0.1f
+# define ROT_SPEED 0.5f
 # define TEXTURE_WIDTH 64
 # define TEXTURE_HEIGHT 64
 # define SIZE_PLAYER 3
 # define MINIMAP_SCALE 5
+# define MINIMAP_WIDTH 200
+# define MINIMAP_HEIGHT 200
 
 // KEY
 # define KEY_A 97

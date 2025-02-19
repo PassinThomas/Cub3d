@@ -6,7 +6,7 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 05:02:29 by emehdaou          #+#    #+#             */
-/*   Updated: 2024/12/27 19:10:08 by tpassin          ###   ########.fr       */
+/*   Updated: 2025/02/19 16:40:04 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	check_rgb(char *str, t_args *args, int index)
 		return (free_tab(rgb), free_tab(tab),
 			ft_printf("Error taille Floor/Celling\n"), 1);
 	if (store_rgb(rgb, args, index))
-		return (ft_printf("Error rgb\n"), free_tab(rgb), free_tab(tab), 4);
+		return (ft_printf("Error rgb\n"), free_tab(rgb), free_tab(tab), free_path(args), 4);
 	free_tab(tab);
 	free_tab(rgb);
 	return (0);
@@ -116,8 +116,8 @@ int	init_args(int fd, t_args *args, t_map *map)
 	if (!close(fd) || !str)
 		return (ft_printf("Error\n%s\n", ERR), free(str), 0);
 	// printf("str = %s\n", str);
-	if (check_newline(str))
-		return (printf("Error double newline\n"), free(str), 3);
+	// if (check_newline(str))
+	// 	return (printf("Error double newline\n"), free(str), 3);
 	map->file = ft_split(str, '\n');
 	free(str);
 	if (!map->file)

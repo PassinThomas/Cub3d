@@ -6,7 +6,7 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 01:25:22 by tpassin           #+#    #+#             */
-/*   Updated: 2024/12/30 17:12:01 by tpassin          ###   ########.fr       */
+/*   Updated: 2025/02/19 16:50:23 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,7 @@ void	start_game(t_map *map)
 	map->map = init_map(map);
 	map->mlx = mlx_init();
 	if (init_data(map))
-	{
-		free_all(map);
 		ft_close_window(map);
-	}
 	map->win = mlx_new_window(map->mlx, WIN_WIDTH, WIN_HEIGHT, "Cub3D");
 	map->img.img = mlx_new_image(map->mlx, WIN_WIDTH, WIN_HEIGHT);
 	map->img.addr = mlx_get_data_addr(map->img.img, &map->img.bits_per_pixel,

@@ -6,7 +6,7 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 15:51:02 by tpassin           #+#    #+#             */
-/*   Updated: 2024/12/27 00:06:52 by tpassin          ###   ########.fr       */
+/*   Updated: 2025/02/19 15:58:30 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	check_left(char **tab, int i, int j)
 
 int	check_down(char **tab, int i, int j, int height)
 {
-	while (tab[i])
+	while (i < height && tab[i])
 	{
 		if (j >= ft_strlen(tab[i]))
 			return (0);
@@ -55,7 +55,7 @@ int	check_down(char **tab, int i, int j, int height)
 
 int	check_up(char **tab, int i, int j)
 {
-	while (i >= 0 && tab[i - 1])
+	while (i > 0 && tab[i - 1])
 	{
 		if (tab[i][j] == '1')
 			return (1);

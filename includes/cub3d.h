@@ -6,7 +6,7 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 19:01:43 by akasekai          #+#    #+#             */
-/*   Updated: 2024/12/30 17:14:26 by tpassin          ###   ########.fr       */
+/*   Updated: 2025/02/19 15:33:23 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,6 @@ void	start_game(t_map *map);
 void	draw_floor_ceiling(t_img *img, t_map *map);
 void	draw_minimap(t_map *map);
 void	free_text(t_map *map);
+void	free_path(t_args *args);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 22:17:13 by tpassin           #+#    #+#             */
-/*   Updated: 2024/12/30 17:39:21 by tpassin          ###   ########.fr       */
+/*   Updated: 2025/01/29 17:07:21 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ typedef struct
 	int			color;
 	int			tex_x;
 	int			tex_y;
+	int			prev_x;
+	int			scale;
 	double		wall_x;
 	double		step;
 	double		tex_pos;
@@ -87,6 +89,7 @@ typedef struct s_map
 	int			height;
 	int			width;
 	int			y;
+	double		margin;
 	t_pos		pos;
 	t_pos		exit;
 	t_args		args;

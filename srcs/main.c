@@ -6,7 +6,7 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 13:55:27 by tpassin           #+#    #+#             */
-/*   Updated: 2024/12/30 17:14:48 by tpassin          ###   ########.fr       */
+/*   Updated: 2025/02/19 15:51:25 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,11 @@ int	main(int argc, char **argv)
 	t_args	args;
 
 	ft_memset(&map, 0, sizeof(t_map));
+	if (argc != 2)
+		return (ft_printf("Error args\n"), 1);
 	fd = open(argv[1], O_RDWR);
 	if (fd == -1)
-		return (ft_printf("Error fd\n"));
+		return (ft_printf("Error fd\n"), 1);
 	if (init_args(fd, &args, &map))
 		return (1);
 	map.args = args;

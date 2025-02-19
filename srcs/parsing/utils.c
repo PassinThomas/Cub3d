@@ -6,7 +6,7 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 00:02:39 by tpassin           #+#    #+#             */
-/*   Updated: 2024/12/27 19:41:42 by tpassin          ###   ########.fr       */
+/*   Updated: 2025/02/19 15:33:07 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,19 @@ void	print_struct(t_args *args)
 	{
 		printf("floor[%i] == %i\n", i, args->floor[i]);
 		printf("celling[%i] == %i\n", i, args->celling[i]);
+		i++;
+	}
+}
+
+void	free_path(t_args *args)
+{
+	int	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		if (args->path[i])
+			free(args->path[i]);
 		i++;
 	}
 }

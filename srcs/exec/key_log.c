@@ -6,7 +6,7 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:36:38 by tpassin           #+#    #+#             */
-/*   Updated: 2024/12/30 17:03:52 by tpassin          ###   ########.fr       */
+/*   Updated: 2025/01/23 16:38:12 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	rotate_left(t_map *map)
 	double	old_planex;
 	double	rot_speed;
 
-	rot_speed = ROT_SPEED;
+	rot_speed = ROT_SPEED / 10;
 	if (map->left_pressed)
 	{
 		oldir = map->camera.dir.x;
@@ -64,7 +64,7 @@ void	rotate_right(t_map *map)
 	double	rot_speed;
 	double	old_planex;
 
-	rot_speed = ROT_SPEED;
+	rot_speed = ROT_SPEED / 10;
 	if (map->right_pressed)
 	{
 		oldir = map->camera.dir.x;
