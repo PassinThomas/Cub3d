@@ -125,6 +125,6 @@ int	check_map(char **file, t_args *args, t_map *map)
 		return (ft_printf("Error check_col %i\n", 1));
 	get_index(map);
 	if (backtrack(map))
-		return (free_path(args), ft_printf("Error backtrack\n"), 1);
+		return (free_args(args), ft_printf("Error backtrack\n"), 1);
 	return (0);
 }

@@ -12,6 +12,20 @@
 
 #include "../../includes/cub3d.h"
 
+int	in_tab(char *str, char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (i < 6)
+	{
+		if (!ft_strcmp(str, tab[i]))
+			return (i);
+		i++;
+	}
+	return (-1);
+}
+
 int	is_border(char **tab, int i, int j)
 {
 	int	size;
@@ -90,7 +104,7 @@ int	is_cub(char *str)
 // 	}
 // }
 
-void	free_path(t_args *args)
+void	free_args(t_args *args)
 {
 	int	i;
 

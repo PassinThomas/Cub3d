@@ -43,8 +43,9 @@ void	start_game(t_map *map);
 void	draw_floor_ceiling(t_img *img, t_map *map);
 void	draw_minimap(t_map *map);
 void	free_text(t_map *map);
-void	free_path(t_args *args);
+void	free_args(t_args *args);
 int		is_border(char **tab, int i, int j);
 int		is_cub(char *str);
-    
+int		in_tab(char *str, char **tab);
+
 #endif

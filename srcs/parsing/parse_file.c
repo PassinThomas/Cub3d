@@ -17,11 +17,6 @@ int	check_cardinals(char **tab, t_args *args, int index)
 	int	i;
 
 	i = 0;
-	if (!(!ft_strcmp(tab[0], "NO") && index == 0) && !(!ft_strcmp(tab[0], "SO")
-			&& index == 1) && !(!ft_strcmp(tab[0], "WE") && index == 2)
-		&& !(!ft_strcmp(tab[0], "EA") && index == 3))
-		return (ft_printf("Error Cardinals\n"), free_tab(tab), 2);
-	i = 0;
 	while (tab[1][i])
 	{
 		if (!ft_isprint(tab[1][i]))
@@ -29,7 +24,6 @@ int	check_cardinals(char **tab, t_args *args, int index)
 		i++;
 	}
 	args->path[index] = ft_strdup(tab[1]);
-	free_tab(tab);
 	return (0);
 }
 
@@ -48,6 +42,8 @@ int	store_rgb(char **rgb, t_args *args, int index)
 				return (4);
 			j++;
 		}
+		if (ft_atoi(rgb[i]) > 255 || ft_atoi(rgb[i]) < 0)
+			return (1);
 		if (index == 4)
 			args->floor[i] = ft_atoi(rgb[i]);
 		else
@@ -57,62 +53,53 @@ int	store_rgb(char **rgb, t_args *args, int index)
 	return (0);
 }
 
-int	check_rgb(char *str, t_args *args, int index)
+int	check_rgb(char **tab, t_args *args, int index)
 {
 	int		i;
 	int		j;
-	char	**tab;
 	char	**rgb;
 
-	tab = ft_split(str, ' ');
-	if (len_tab(tab) != 2)
-		return (free_tab(tab), ft_printf("Error taille Floor/Celling\n"), 1);
-	if ((ft_strcmp(tab[0], "F") || index != 4) && (ft_strcmp(tab[0], "C")
-			|| index != 5))
-		return (free_tab(tab), ft_printf("Error Floor/Celling\n"), 2);
 	rgb = ft_split(tab[1], ',');
 	if (len_tab(rgb) != 3)
-		return (free_tab(rgb), free_tab(tab),
-			ft_printf("Error taille Floor/Celling\n"), 1);
+		return (free_tab(rgb), ft_printf("Error taille Floor/Celling\n"), 1);
 	if (store_rgb(rgb, args, index))
-		return (ft_printf("Error rgb\n"), free_tab(rgb), free_tab(tab),
-			free_path(args), 4);
-	free_tab(tab);
+		return (free_args(args), free_tab(rgb), 4);
 	free_tab(rgb);
 	return (0);
 }
 
 int	check_args(char **file, t_args *args, t_map *map)
 {
-	int		i;
-	char	**tmp;
+	int			i;
+	int			index;
+	char		**tmp;
+	static char	*tab[6] = {"NO", "SO", "WE", "EA", "F", "C"};
 
 	i = 0;
-	while (i < 4)
-	{
-		tmp = ft_split(file[i], ' ');
-		if (len_tab(tmp) != 2)
-			return (free_tab(tmp), ft_printf("Error taille cardinals\n"), 1);
-		if (check_cardinals(tmp, args, i))
-			return (2);
-		i++;
-	}
-	i = 4;
 	while (i < 6)
 	{
-		if (check_rgb(file[i], args, i))
-			return (4);
+		tmp = ft_split(file[i], ' ');
+		if (!tmp || len_tab(tmp) != 2)
+			return (free_tab(tmp), ft_printf("Error taille arguments\n"), 1);
+		index = in_tab(tmp[0], tab);
+		if (index == -1)
+			return (printf("Error Cardinals\n"), free_tab(tmp), 1);
+		if (index < 4 && check_cardinals(tmp, args, index))
+			return (printf("Error cardinals"), free_tab(tmp), 1);
+		else if (index >= 4 && check_rgb(tmp, args, index))
+			return (printf("Error rgb"), free_tab(tmp), 2);
+		free_tab(tmp);
 		i++;
 	}
-	if (check_map(file, args, map))
-		return (5);
 	return (0);
 }
 
 int	init_args(int fd, t_args *args, t_map *map)
 {
 	char	*str;
+	int		flag;
 
+	flag = 0;
 	str = recup_gnl(fd);
 	if (!close(fd) || !str)
 		return (ft_printf("Error\n%s\n", ERR), 1);
@@ -122,5 +109,7 @@ int	init_args(int fd, t_args *args, t_map *map)
 		return (1);
 	if (check_args(map->file, args, map))
 		return (free_tab(map->file), 2);
+	if (check_map(map->file, args, map))
+		return (5);
 	return (0);
 }

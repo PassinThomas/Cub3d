@@ -1,8 +1,8 @@
+WE        ./textures/redbrick_1.xpm                         
                 NO                          ./textures/eagle.xpm
-SO      ./textures/bluestone.xpm
-WE                   ./textures/redbrick_1.xpm                         
 EA ./textures/wood.xpm
-F 42,98,61
+SO      ./textures/bluestone.xpm
+F 42,98,25
 C 171,191,210
 111111111111111111111111
 100100000000000000000001
