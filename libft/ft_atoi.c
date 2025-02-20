@@ -12,8 +12,8 @@
 
 long	ft_atoi(const char *str)
 {
-	int	i;
-	int	neg;
+	int		i;
+	int		neg;
 	long	result;
 
 	i = 0;

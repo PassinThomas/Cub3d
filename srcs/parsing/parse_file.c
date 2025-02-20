@@ -27,44 +27,30 @@ int	check_cardinals(char **tab, t_args *args, int index)
 	return (0);
 }
 
-int	store_rgb(char **rgb, t_args *args, int index)
+int	store_rgb(char **tab, t_args *args, int index)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while (rgb[i])
+	tab = tab + 1;
+	while (tab[i])
 	{
 		j = 0;
-		while (rgb[i][j])
+		while (tab[i][j])
 		{
-			if (!ft_isdigit(rgb[i][j]))
+			if (!ft_isdigit(tab[i][j]))
 				return (4);
 			j++;
 		}
-		if (ft_atoi(rgb[i]) > 255 || ft_atoi(rgb[i]) < 0)
+		if (ft_atoi(tab[i]) > 255 || ft_atoi(tab[i]) < 0)
 			return (1);
 		if (index == 4)
-			args->floor[i] = ft_atoi(rgb[i]);
+			args->floor[i] = ft_atoi(tab[i]);
 		else
-			args->celling[i] = ft_atoi(rgb[i]);
+			args->celling[i] = ft_atoi(tab[i]);
 		i++;
 	}
-	return (0);
-}
-
-int	check_rgb(char **tab, t_args *args, int index)
-{
-	int		i;
-	int		j;
-	char	**rgb;
-
-	rgb = ft_split(tab[1], ',');
-	if (len_tab(rgb) != 3)
-		return (free_tab(rgb), ft_printf("Error taille Floor/Celling\n"), 1);
-	if (store_rgb(rgb, args, index))
-		return (free_args(args), free_tab(rgb), 4);
-	free_tab(rgb);
 	return (0);
 }
 
@@ -78,17 +64,19 @@ int	check_args(char **file, t_args *args, t_map *map)
 	i = 0;
 	while (i < 6)
 	{
-		tmp = ft_split(file[i], ' ');
-		if (!tmp || (len_tab(tmp) != 2))
+		tmp = ft_split(file[i], " ,");
+		if (!tmp)
 			return (free_tab(tmp), free_args(args),
 				ft_printf("Error taille arguments\n"), 1);
 		index = in_tab(tmp[0], tab);
 		if (index == -1)
 			return (printf("Error Cardinals\n"), free_tab(tmp), 1);
-		if (index < 4 && check_cardinals(tmp, args, index))
+		if (index < 4 && (len_tab(tmp) != 2 || check_cardinals(tmp, args,
+					index)))
 			return (printf("Error cardinals"), free_tab(tmp), 1);
-		else if (index >= 4 && check_rgb(tmp, args, index))
-			return (printf("Error rgb"), free_tab(tmp), 2);
+		else if (index >= 4 && (len_tab(tmp) != 4 || store_rgb(tmp, args,
+					index)))
+			return (printf("Error rgb\n"), free_tab(tmp), free_args(args), 2);
 		free_tab(tmp);
 		i++;
 	}
@@ -104,7 +92,7 @@ int	init_args(int fd, t_args *args, t_map *map)
 	str = recup_gnl(fd);
 	if (!close(fd) || !str)
 		return (ft_printf("Error\n%s\n", ERR), 1);
-	map->file = ft_split(str, '\n');
+	map->file = ft_split(str, "\n");
 	free(str);
 	if (!map->file)
 		return (1);

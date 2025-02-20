@@ -24,12 +24,12 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-size_t len_tab(char **tab)
+size_t	len_tab(char **tab)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
-	while(tab[i])
+	while (tab[i])
 		i++;
 	return (i);
 }
