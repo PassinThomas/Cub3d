@@ -6,7 +6,7 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 00:03:52 by tpassin           #+#    #+#             */
-/*   Updated: 2025/02/19 15:34:09 by tpassin          ###   ########.fr       */
+/*   Updated: 2025/02/20 20:16:32 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ int	check_map(char **file, t_args *args, t_map *map)
 		return (ft_printf("Error check_col %i\n", 1));
 	get_index(map);
 	if (backtrack(map))
-		return (free_args(args), ft_printf("Error backtrack\n"), 1);
+		return (free_args(args), ft_printf("Error backtrack\n"), free_tab(file),
+			1);
 	return (0);
 }

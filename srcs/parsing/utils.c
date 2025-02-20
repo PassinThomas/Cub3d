@@ -6,7 +6,7 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 00:02:39 by tpassin           #+#    #+#             */
-/*   Updated: 2025/02/19 15:33:07 by tpassin          ###   ########.fr       */
+/*   Updated: 2025/02/20 20:16:01 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,20 @@ int	is_border(char **tab, int i, int j)
 	size = 0;
 	while (tab[size])
 		size++;
-	if ((i == size - 1 || tab[i + 1][j] == '\0' || tab[i + 1][j] == '\n')
-		|| (!tab[i][j + 1] || tab[i][j + 1] == '\n') || (!tab[i - 1][j] || tab[i
-			- 1][j] == ' ' || i == 0) || (j == 0 || !tab[i][j - 1] || tab[i][j
-			- 1] == ' '))
+	if (i + 1 >= size || i <= 0 || j >= ft_strlen(tab[i]) || j <= 0)
 		return (1);
+	if ((j > ft_strlen(tab[i + 1]) || tab[i + 1][j] == '\0' || tab[i
+			+ 1][j] == '\n' || tab[i + 1][j] == ' '))
+		return (2);
+	if ((j > ft_strlen(tab[i - 1]) || tab[i - 1][j] == '\0' || tab[i
+			- 1][j] == '\n' || tab[i - 1][j] == ' '))
+		return (3);
+	if ((tab[i][j + 1] == '\0' || tab[i][j + 1] == '\n' || tab[i][j
+			+ 1] == ' '))
+		return (4);
+	if ((tab[i][j - 1] == '\0' || tab[i][j - 1] == '\n' || tab[i][j
+			- 1] == ' '))
+		return (5);
 	return (0);
 }
 

@@ -6,25 +6,25 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 17:22:54 by tpassin           #+#    #+#             */
-/*   Updated: 2025/01/03 17:20:38 by tpassin          ###   ########.fr       */
+/*   Updated: 2025/02/20 20:19:52 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
 void	calculate_texture_coords(t_ray ray, t_map *map, double *wall_x,
-		int *tex_x)
+		int *tex_x, t_img *texture)
 {
 	if (ray.side == 0)
 		*wall_x = map->camera.pos.y + ray.perp_walldist * ray.raydir.y;
 	else
 		*wall_x = map->camera.pos.x + ray.perp_walldist * ray.raydir.x;
 	*wall_x -= floor(*wall_x);
-	*tex_x = (int)(*wall_x * TEXTURE_WIDTH);
+	*tex_x = (int)(*wall_x * texture->width);
 	if (ray.side == 0 && ray.raydir.x < 0)
-		*tex_x = TEXTURE_WIDTH - *tex_x - 1;
+		*tex_x = texture->width - *tex_x - 1;
 	if (ray.side == 1 && ray.raydir.y < 0)
-		*tex_x = TEXTURE_WIDTH - *tex_x - 1;
+		*tex_x = texture->width - *tex_x - 1;
 }
 
 t_img	*select_texture(t_ray ray, t_map *map)
@@ -53,20 +53,22 @@ void	draw_vert_line(t_img *img, int x, t_ray ray, t_map *map)
 {
 	t_img	*texture;
 
+	// texture = &map->text[ray.side];
+	texture = select_texture(ray, map);
 	if (ray.start < 0)
 		ray.start = 0;
 	if (ray.end >= WIN_HEIGHT)
 		ray.end = WIN_HEIGHT - 1;
-	calculate_texture_coords(ray, map, &map->text->wall_x, &map->text->tex_x);
-	texture = select_texture(ray, map);
-	map->text->step = (double)TEXTURE_HEIGHT / ray.lineheight;
+	calculate_texture_coords(ray, map, &map->text->wall_x, &map->text->tex_x,
+		texture);
+	map->text->step = (double)texture->height / ray.lineheight;
 	map->text->tex_pos = (ray.start - WIN_HEIGHT / 2 + ray.lineheight / 2)
 		* map->text->step;
 	map->y = ray.start;
 	while (map->y <= ray.end)
 	{
-		if (map->text->tex_pos >= TEXTURE_HEIGHT)
-			map->text->tex_y = (int)(map->text->tex_pos) % TEXTURE_HEIGHT;
+		if (map->text->tex_pos >= texture->height)
+			map->text->tex_y = (int)(map->text->tex_pos) % texture->height;
 		else
 			map->text->tex_y = (int)(map->text->tex_pos);
 		map->text->tex_pos += map->text->step;
@@ -97,5 +99,4 @@ void	render(t_map *map)
 		draw_vert_line(&map->img, x, ray, map);
 		x++;
 	}
-	draw_minimap(map);
 }

@@ -6,7 +6,7 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 15:45:50 by tpassin           #+#    #+#             */
-/*   Updated: 2025/01/02 17:47:09 by tpassin          ###   ########.fr       */
+/*   Updated: 2025/02/20 18:05:24 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	get_texture_color(t_img *text, int x, int y)
 {
 	char	*dst;
 
-	if (x < 0 || x >= TEXTURE_WIDTH || y < 0 || y >= TEXTURE_HEIGHT)
+	if (x < 0 || x >= text->width || y < 0 || y >= text->height)
 		return (0);
 	dst = text->addr + (y * text->line_length + x * (text->bits_per_pixel / 8));
 	return (*(unsigned int *)dst);

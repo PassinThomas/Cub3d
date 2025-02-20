@@ -6,7 +6,7 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 13:55:27 by tpassin           #+#    #+#             */
-/*   Updated: 2025/02/19 15:51:25 by tpassin          ###   ########.fr       */
+/*   Updated: 2025/02/20 20:13:26 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,9 @@ int	main(int argc, char **argv)
 	int		fd;
 	t_map	map;
 	t_args	args;
-
+	
 	ft_memset(&map, 0, sizeof(t_map));
+	ft_memset(args.path, 0, sizeof(t_args));
 	if (argc != 2)
 		return (ft_printf("Error args\n"), 1);
 	if (!is_cub(argv[1]))

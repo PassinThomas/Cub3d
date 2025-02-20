@@ -6,7 +6,7 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 05:02:29 by emehdaou          #+#    #+#             */
-/*   Updated: 2025/02/19 16:40:04 by tpassin          ###   ########.fr       */
+/*   Updated: 2025/02/20 20:16:10 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,9 @@ int	check_args(char **file, t_args *args, t_map *map)
 	while (i < 6)
 	{
 		tmp = ft_split(file[i], ' ');
-		if (!tmp || len_tab(tmp) != 2)
-			return (free_tab(tmp), ft_printf("Error taille arguments\n"), 1);
+		if (!tmp || (len_tab(tmp) != 2))
+			return (free_tab(tmp), free_args(args),
+				ft_printf("Error taille arguments\n"), 1);
 		index = in_tab(tmp[0], tab);
 		if (index == -1)
 			return (printf("Error Cardinals\n"), free_tab(tmp), 1);
