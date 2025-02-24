@@ -6,7 +6,7 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 05:02:29 by emehdaou          #+#    #+#             */
-/*   Updated: 2025/02/20 20:16:10 by tpassin          ###   ########.fr       */
+/*   Updated: 2025/02/24 16:53:37 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 int	check_cardinals(char **tab, t_args *args, int index)
 {
-	int	i;
+	static int	count = 0;
+	char		*extension;
+	int			i;
 
 	i = 0;
 	while (tab[1][i])
@@ -23,7 +25,18 @@ int	check_cardinals(char **tab, t_args *args, int index)
 			return (ft_printf("Error path printable\n"), 1);
 		i++;
 	}
-	args->path[index] = ft_strdup(tab[1]);
+	if (tab[1])
+	{
+		extension = ft_strrchr(tab[1], '.');
+		if (extension && ft_strcmp(extension, ".xpm") == 0)
+		{
+			if (count != 4)
+				args->path[index] = ft_strdup(tab[1]);
+			count++;
+		}
+		else
+			return (ft_printf("Error: Invalid file extension\n"), 1);
+	}
 	return (0);
 }
 
@@ -70,10 +83,12 @@ int	check_args(char **file, t_args *args, t_map *map)
 				ft_printf("Error taille arguments\n"), 1);
 		index = in_tab(tmp[0], tab);
 		if (index == -1)
-			return (printf("Error Cardinals\n"), free_tab(tmp), 1);
+			return (printf("Error Cardinals\n"), free_tab(tmp), free_args(args),
+				1);
 		if (index < 4 && (len_tab(tmp) != 2 || check_cardinals(tmp, args,
 					index)))
-			return (printf("Error cardinals"), free_tab(tmp), 1);
+			return (printf("Error cardinals\n"), free_tab(tmp), free_args(args),
+				1);
 		else if (index >= 4 && (len_tab(tmp) != 4 || store_rgb(tmp, args,
 					index)))
 			return (printf("Error rgb\n"), free_tab(tmp), free_args(args), 2);
@@ -101,4 +116,18 @@ int	init_args(int fd, t_args *args, t_map *map)
 	if (check_map(map->file, args, map))
 		return (5);
 	return (0);
+}
+
+int	is_empty_line(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] != ' ' && line[i] != '\t' && line[i] != '\n')
+			return (0);
+		i++;
+	}
+	return (1);
 }

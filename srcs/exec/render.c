@@ -6,7 +6,7 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 17:22:54 by tpassin           #+#    #+#             */
-/*   Updated: 2025/02/20 20:19:52 by tpassin          ###   ########.fr       */
+/*   Updated: 2025/02/24 13:02:09 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void	draw_vert_line(t_img *img, int x, t_ray ray, t_map *map)
 {
 	t_img	*texture;
 
-	// texture = &map->text[ray.side];
 	texture = select_texture(ray, map);
 	if (ray.start < 0)
 		ray.start = 0;

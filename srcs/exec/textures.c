@@ -6,7 +6,7 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 15:40:36 by tpassin           #+#    #+#             */
-/*   Updated: 2025/02/20 23:41:05 by tpassin          ###   ########.fr       */
+/*   Updated: 2025/02/24 13:01:54 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ int	load_text(t_map *map, t_img *text, char *path)
 	text->img = mlx_xpm_file_to_image(map->mlx, path, &text->width,
 			&text->height);
 	if (text->img == NULL)
-		return (1);
+		return (ft_printf("Error textures\n"), 1);
 	text->addr = mlx_get_data_addr(text->img, &text->bits_per_pixel,
 			&text->line_length, &text->endian);
 	if (text->addr == NULL)
-		return (1);
+		return (ft_printf("Error textures\n"), 1);
 	return (0);
 }
 

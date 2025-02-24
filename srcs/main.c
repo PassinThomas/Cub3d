@@ -6,7 +6,7 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 13:55:27 by tpassin           #+#    #+#             */
-/*   Updated: 2025/02/20 20:13:26 by tpassin          ###   ########.fr       */
+/*   Updated: 2025/02/24 15:25:42 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	free_int_tab(int **tab, int height)
 	free(tab);
 }
 
-void	ft_close_window(t_map *map)
+int	ft_close_window(t_map *map)
 {
 	free_text(map);
 	if (map->img.img)
@@ -41,6 +41,7 @@ void	ft_close_window(t_map *map)
 		free_tab(map->file);
 	free_all(map);
 	exit(0);
+	return (0);
 }
 
 void	free_all(t_map *map)
@@ -48,15 +49,7 @@ void	free_all(t_map *map)
 	int	i;
 
 	i = 0;
-	if (map->args.path && map->args.path[i])
-	{
-		while (i < 4)
-		{
-			if (map->args.path[i])
-				free(map->args.path[i]);
-			i++;
-		}
-	}
+	free_args(&map->args);
 	free_int_tab(map->map, map->height);
 }
 
