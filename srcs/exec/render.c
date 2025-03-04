@@ -6,25 +6,26 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 17:22:54 by tpassin           #+#    #+#             */
-/*   Updated: 2025/02/24 13:02:09 by tpassin          ###   ########.fr       */
+/*   Updated: 2025/03/04 13:54:46 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	calculate_texture_coords(t_ray ray, t_map *map, double *wall_x,
-		int *tex_x, t_img *texture)
+void	calculate_texture_coords(t_ray ray, t_map *map, t_img *texture)
 {
 	if (ray.side == 0)
-		*wall_x = map->camera.pos.y + ray.perp_walldist * ray.raydir.y;
+		map->text->wall_x = map->camera.pos.y + ray.perp_walldist
+			* ray.raydir.y;
 	else
-		*wall_x = map->camera.pos.x + ray.perp_walldist * ray.raydir.x;
-	*wall_x -= floor(*wall_x);
-	*tex_x = (int)(*wall_x * texture->width);
+		map->text->wall_x = map->camera.pos.x + ray.perp_walldist
+			* ray.raydir.x;
+	map->text->wall_x -= floor(map->text->wall_x);
+	map->text->tex_x = (int)(map->text->wall_x * texture->width);
 	if (ray.side == 0 && ray.raydir.x < 0)
-		*tex_x = texture->width - *tex_x - 1;
+		map->text->tex_x = texture->width - map->text->tex_x - 1;
 	if (ray.side == 1 && ray.raydir.y < 0)
-		*tex_x = texture->width - *tex_x - 1;
+		map->text->tex_x = texture->width - map->text->tex_x - 1;
 }
 
 t_img	*select_texture(t_ray ray, t_map *map)
@@ -58,8 +59,7 @@ void	draw_vert_line(t_img *img, int x, t_ray ray, t_map *map)
 		ray.start = 0;
 	if (ray.end >= WIN_HEIGHT)
 		ray.end = WIN_HEIGHT - 1;
-	calculate_texture_coords(ray, map, &map->text->wall_x, &map->text->tex_x,
-		texture);
+	calculate_texture_coords(ray, map, texture);
 	map->text->step = (double)texture->height / ray.lineheight;
 	map->text->tex_pos = (ray.start - WIN_HEIGHT / 2 + ray.lineheight / 2)
 		* map->text->step;

@@ -6,7 +6,7 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 19:01:43 by akasekai          #+#    #+#             */
-/*   Updated: 2025/02/24 16:17:09 by tpassin          ###   ########.fr       */
+/*   Updated: 2025/03/04 13:59:02 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	rotate_left(t_map *map);
 void	rotate_right(t_map *map);
 void	start_game(t_map *map);
 void	draw_floor_ceiling(t_img *img, t_map *map);
-void	draw_minimap(t_map *map);
 void	free_text(t_map *map);
 void	free_args(t_args *args);
 int     ft_close_window(t_map *map);
