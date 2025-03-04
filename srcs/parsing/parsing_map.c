@@ -6,7 +6,7 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 00:03:52 by tpassin           #+#    #+#             */
-/*   Updated: 2025/02/24 16:57:39 by tpassin          ###   ########.fr       */
+/*   Updated: 2025/03/04 17:15:23 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,17 +130,3 @@ int	check_map(char **file, t_args *args, t_map *map)
 			1);
 	return (0);
 }
-
-// int	is_empty_line(char *line)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (line[i])
-// 	{
-// 		if (line[i] != ' ' && line[i] != '\t' && line[i] != '\n')
-// 			return (0);
-// 		i++;
-// 	}
-// 	return (1);
-// }

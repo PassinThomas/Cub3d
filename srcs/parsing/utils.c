@@ -6,11 +6,41 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 00:02:39 by tpassin           #+#    #+#             */
-/*   Updated: 2025/02/24 13:34:51 by tpassin          ###   ########.fr       */
+/*   Updated: 2025/03/04 18:00:47 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+int	check_double(char *str, char c)
+{
+	int	i;
+	int	size;
+
+	i = 0;
+	size = ft_strlen(str);
+	while (i + 1 < size)
+	{
+		if (str[i] == c)
+		{
+			if (c == '\n')
+				if (str[i + 1] == c)
+					return (1);
+			else if (c == ',')
+			{
+				while (i < size && str[i] == ' ')
+				{
+					printf("str[i] == %c\n", str[i]);
+					i++;
+				}
+				if (i != size && str[i] == c)
+					return (1);
+			}
+		}
+		i++;
+	}
+	return (0);
+}
 
 int	in_tab(char *str, char **tab)
 {
@@ -50,29 +80,6 @@ int	is_border(char **tab, int i, int j)
 	return (0);
 }
 
-void	map_realloc(t_map *map)
-{
-	char	*new;
-	int		len;
-	int		i;
-
-	i = 0;
-	while (map->tab[i])
-	{
-		len = ft_strlen(map->tab[i]);
-		if (len < map->width)
-		{
-			new = malloc(map->width + 1);
-			ft_strcpy(new, map->tab[i]);
-			ft_memset(new + len, '1', map->width - len);
-			new[map->width] = '\0';
-			free(map->tab[i]);
-			map->tab[i] = new;
-		}
-		i++;
-	}
-}
-
 int	is_cub(char *str)
 {
 	int	size;
@@ -83,6 +90,19 @@ int	is_cub(char *str)
 	if (ft_strcmp(".cub", &str[size - 4]))
 		return (0);
 	return (1);
+}
+
+void	free_args(t_args *args)
+{
+	int	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		if (args->path[i])
+			free(args->path[i]);
+		i++;
+	}
 }
 
 // void	print_tab(char **tab)
@@ -113,15 +133,25 @@ int	is_cub(char *str)
 // 	}
 // }
 
-void	free_args(t_args *args)
-{
-	int	i;
+// void	map_realloc(t_map *map)
+// {
+// 	char	*new;
+// 	int		len;
+// 	int		i;
 
-	i = 0;
-	while (i < 4)
-	{
-		if (args->path[i])
-			free(args->path[i]);
-		i++;
-	}
-}
+// 	i = 0;
+// 	while (map->tab[i])
+// 	{
+// 		len = ft_strlen(map->tab[i]);
+// 		if (len < map->width)
+// 		{
+// 			new = malloc(map->width + 1);
+// 			ft_strcpy(new, map->tab[i]);
+// 			ft_memset(new + len, '1', map->width - len);
+// 			new[map->width] = '\0';
+// 			free(map->tab[i]);
+// 			map->tab[i] = new;
+// 		}
+// 		i++;
+// 	}
+// }

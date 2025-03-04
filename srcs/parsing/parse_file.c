@@ -6,11 +6,39 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 05:02:29 by emehdaou          #+#    #+#             */
-/*   Updated: 2025/02/24 16:53:37 by tpassin          ###   ########.fr       */
+/*   Updated: 2025/03/04 17:49:12 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+int	check_empty(char *str)
+{
+	int			i;
+	int			j;
+	int			cnt;
+	char		*tmp;
+	static char	*tab[6] = {"NO", "SO", "WE", "EA", "F ", "C "};
+
+	i = 0;
+	cnt = 0;
+	while (cnt < 6 && str[i])
+	{
+		j = -1;
+		while (++j < 6)
+			if (!ft_strncmp(str + i, tab[j], 2))
+				cnt++;
+		i++;
+	}
+	if (cnt != 6)
+		return (2);
+	while (str[i] && str[i] != '\n')
+		i++;
+	tmp = ft_strtrim(str + ++i, "\n ");
+	if (check_double(tmp, '\n'))
+		return (free(tmp), 1);
+	return (free(tmp), 0);
+}
 
 int	check_cardinals(char **tab, t_args *args, int index)
 {
@@ -74,26 +102,25 @@ int	check_args(char **file, t_args *args, t_map *map)
 	char		**tmp;
 	static char	*tab[6] = {"NO", "SO", "WE", "EA", "F", "C"};
 
-	i = 0;
-	while (i < 6)
+	i = -1;
+	while (++i < 6)
 	{
+		if (check_double(file[i], ','))
+			return (1);
 		tmp = ft_split(file[i], " ,");
 		if (!tmp)
-			return (free_tab(tmp), free_args(args),
-				ft_printf("Error taille arguments\n"), 1);
+			return (free_tab(tmp), free_args(args), printf("Error\n"), 1);
 		index = in_tab(tmp[0], tab);
 		if (index == -1)
 			return (printf("Error Cardinals\n"), free_tab(tmp), free_args(args),
 				1);
 		if (index < 4 && (len_tab(tmp) != 2 || check_cardinals(tmp, args,
 					index)))
-			return (printf("Error cardinals\n"), free_tab(tmp), free_args(args),
-				1);
+			return (printf("Error card\n"), free_tab(tmp), free_args(args), 1);
 		else if (index >= 4 && (len_tab(tmp) != 4 || store_rgb(tmp, args,
 					index)))
 			return (printf("Error rgb\n"), free_tab(tmp), free_args(args), 2);
 		free_tab(tmp);
-		i++;
 	}
 	return (0);
 }
@@ -107,6 +134,8 @@ int	init_args(int fd, t_args *args, t_map *map)
 	str = recup_gnl(fd);
 	if (!close(fd) || !str)
 		return (ft_printf("Error\n%s\n", ERR), 1);
+	if (check_empty(str))
+		return (free(str), printf("Error parsing\n"), 2);
 	map->file = ft_split(str, "\n");
 	free(str);
 	if (!map->file)
@@ -116,18 +145,4 @@ int	init_args(int fd, t_args *args, t_map *map)
 	if (check_map(map->file, args, map))
 		return (5);
 	return (0);
-}
-
-int	is_empty_line(char *line)
-{
-	int	i;
-
-	i = 0;
-	while (line[i])
-	{
-		if (line[i] != ' ' && line[i] != '\t' && line[i] != '\n')
-			return (0);
-		i++;
-	}
-	return (1);
 }

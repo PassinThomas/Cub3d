@@ -6,7 +6,7 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 19:01:43 by akasekai          #+#    #+#             */
-/*   Updated: 2025/03/04 13:59:02 by tpassin          ###   ########.fr       */
+/*   Updated: 2025/03/04 16:45:32 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,6 @@ int     ft_close_window(t_map *map);
 int		is_border(char **tab, int i, int j);
 int		is_cub(char *str);
 int		in_tab(char *str, char **tab);
-int     is_empty_line(char *line);
+int     check_newline(char *str);
 
 #endif
