@@ -6,7 +6,7 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 00:03:52 by tpassin           #+#    #+#             */
-/*   Updated: 2025/03/04 17:15:23 by tpassin          ###   ########.fr       */
+/*   Updated: 2025/03/05 16:29:09 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,31 +82,6 @@ int	check_wall(char **tab)
 	return (0);
 }
 
-int	backtrack(t_map *map)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (map->tab[i])
-	{
-		j = 0;
-		while (map->tab[i][j])
-		{
-			if (map->tab[i][j] == '0')
-			{
-				if (check_wall(map->tab))
-					return (1);
-			}
-			if (map->tab[i][j] == ' ' || map->tab[i][j] == '\t')
-				map->tab[i][j] = '1';
-			j++;
-		}
-		i++;
-	}
-	return (0);
-}
-
 int	check_map(char **file, t_args *args, t_map *map)
 {
 	int	i;
@@ -125,7 +100,7 @@ int	check_map(char **file, t_args *args, t_map *map)
 		return (ft_printf("Error check_col\n"), free_args(args), free_tab(file),
 			1);
 	get_index(map);
-	if (backtrack(map))
+	if (check_wall(map->tab))
 		return (free_args(args), ft_printf("Error backtrack\n"), free_tab(file),
 			1);
 	return (0);

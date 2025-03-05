@@ -6,7 +6,7 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/24 17:22:54 by tpassin           #+#    #+#             */
-/*   Updated: 2025/03/04 13:54:46 by tpassin          ###   ########.fr       */
+/*   Updated: 2025/03/05 13:07:59 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	calculate_texture_coords(t_ray ray, t_map *map, t_img *texture)
 	map->text->tex_x = (int)(map->text->wall_x * texture->width);
 	if (ray.side == 0 && ray.raydir.x < 0)
 		map->text->tex_x = texture->width - map->text->tex_x - 1;
-	if (ray.side == 1 && ray.raydir.y < 0)
+	if (ray.side == 1 && ray.raydir.y > 0)
 		map->text->tex_x = texture->width - map->text->tex_x - 1;
 }
 

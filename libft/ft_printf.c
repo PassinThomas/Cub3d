@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emehdaou <emehdaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 21:44:37 by emehdaou          #+#    #+#             */
-/*   Updated: 2024/01/22 07:20:41 by emehdaou         ###   ########.fr       */
+/*   Updated: 2025/03/05 16:28:45 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_putnbr_hex(long unsigned int nbr, char *base, int *cnt)
 {
-	if (nbr >= ft_strlen(base))
+	if ((int)nbr >= ft_strlen(base))
 		ft_putnbr_hex(nbr / ft_strlen(base), base, cnt);
 	ft_putchar(base[nbr % ft_strlen(base)], 1, cnt);
 }

@@ -6,7 +6,7 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 05:02:29 by emehdaou          #+#    #+#             */
-/*   Updated: 2025/03/04 17:49:12 by tpassin          ###   ########.fr       */
+/*   Updated: 2025/03/05 16:24:45 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,8 @@ int	store_rgb(char **tab, t_args *args, int index)
 				return (4);
 			j++;
 		}
-		if (ft_atoi(tab[i]) > 255 || ft_atoi(tab[i]) < 0)
+		if (ft_strlen(tab[i]) > 3 || ft_atoi(tab[i]) > 255
+			|| ft_atoi(tab[i]) < 0)
 			return (1);
 		if (index == 4)
 			args->floor[i] = ft_atoi(tab[i]);
@@ -95,7 +96,7 @@ int	store_rgb(char **tab, t_args *args, int index)
 	return (0);
 }
 
-int	check_args(char **file, t_args *args, t_map *map)
+int	check_args(char **file, t_args *args)
 {
 	int			i;
 	int			index;
@@ -112,11 +113,10 @@ int	check_args(char **file, t_args *args, t_map *map)
 			return (free_tab(tmp), free_args(args), printf("Error\n"), 1);
 		index = in_tab(tmp[0], tab);
 		if (index == -1)
-			return (printf("Error Cardinals\n"), free_tab(tmp), free_args(args),
-				1);
+			return (printf("Error Cards\n"), free_tab(tmp), free_args(args), 1);
 		if (index < 4 && (len_tab(tmp) != 2 || check_cardinals(tmp, args,
 					index)))
-			return (printf("Error card\n"), free_tab(tmp), free_args(args), 1);
+			return (printf("Error cards\n"), free_tab(tmp), free_args(args), 1);
 		else if (index >= 4 && (len_tab(tmp) != 4 || store_rgb(tmp, args,
 					index)))
 			return (printf("Error rgb\n"), free_tab(tmp), free_args(args), 2);
@@ -140,7 +140,7 @@ int	init_args(int fd, t_args *args, t_map *map)
 	free(str);
 	if (!map->file)
 		return (1);
-	if (check_args(map->file, args, map))
+	if (check_args(map->file, args))
 		return (free_tab(map->file), 2);
 	if (check_map(map->file, args, map))
 		return (5);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emehdaou <emehdaou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 17:31:17 by emehdaou          #+#    #+#             */
-/*   Updated: 2023/11/11 03:41:30 by emehdaou         ###   ########.fr       */
+/*   Updated: 2025/03/05 16:29:41 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	size_t			i;
+	int				i;
 	unsigned char	*s1;
 
 	i = 0;

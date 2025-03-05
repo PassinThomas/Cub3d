@@ -6,7 +6,7 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/27 00:02:39 by tpassin           #+#    #+#             */
-/*   Updated: 2025/03/04 18:00:47 by tpassin          ###   ########.fr       */
+/*   Updated: 2025/03/05 16:10:17 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,24 @@
 int	check_double(char *str, char c)
 {
 	int	i;
-	int	size;
 
 	i = 0;
-	size = ft_strlen(str);
-	while (i + 1 < size)
+	while (i < ft_strlen(str))
 	{
 		if (str[i] == c)
 		{
 			if (c == '\n')
-				if (str[i + 1] == c)
+			{
+				if (i + 1 < ft_strlen(str) && str[i + 1] == c)
 					return (1);
+			}
 			else if (c == ',')
 			{
-				while (i < size && str[i] == ' ')
-				{
-					printf("str[i] == %c\n", str[i]);
+				++i;
+				while (i < ft_strlen(str) && str[i] == ' ')
 					i++;
-				}
-				if (i != size && str[i] == c)
-					return (1);
+				if (i != ft_strlen(str) && str[i] == c)
+					return (printf("Error invalid format rgb\n"), 1);
 			}
 		}
 		i++;
@@ -69,7 +67,7 @@ int	is_border(char **tab, int i, int j)
 			+ 1][j] == '\n' || tab[i + 1][j] == ' '))
 		return (2);
 	if ((j > ft_strlen(tab[i - 1]) || tab[i - 1][j] == '\0' || tab[i
-			- 1][j] == '\n' || tab[i - 1][j] == ' '))
+			- 1][j] == '\n' || tab[i - 1][j] == 32))
 		return (3);
 	if ((tab[i][j + 1] == '\0' || tab[i][j + 1] == '\n' || tab[i][j
 			+ 1] == ' '))
@@ -104,54 +102,3 @@ void	free_args(t_args *args)
 		i++;
 	}
 }
-
-// void	print_tab(char **tab)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (tab[i])
-// 		printf("%s\n", tab[i++]);
-// }
-
-// void	print_struct(t_args *args)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (i < 4)
-// 	{
-// 		printf("args->path[%i] = %s\n", i, args->path[i]);
-// 		i++;
-// 	}
-// 	i = 0;
-// 	while (i < 3)
-// 	{
-// 		printf("floor[%i] == %i\n", i, args->floor[i]);
-// 		printf("celling[%i] == %i\n", i, args->celling[i]);
-// 		i++;
-// 	}
-// }
-
-// void	map_realloc(t_map *map)
-// {
-// 	char	*new;
-// 	int		len;
-// 	int		i;
-
-// 	i = 0;
-// 	while (map->tab[i])
-// 	{
-// 		len = ft_strlen(map->tab[i]);
-// 		if (len < map->width)
-// 		{
-// 			new = malloc(map->width + 1);
-// 			ft_strcpy(new, map->tab[i]);
-// 			ft_memset(new + len, '1', map->width - len);
-// 			new[map->width] = '\0';
-// 			free(map->tab[i]);
-// 			map->tab[i] = new;
-// 		}
-// 		i++;
-// 	}
-// }

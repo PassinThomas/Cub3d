@@ -6,7 +6,7 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 19:01:43 by akasekai          #+#    #+#             */
-/*   Updated: 2025/03/04 16:45:32 by tpassin          ###   ########.fr       */
+/*   Updated: 2025/03/05 16:23:50 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,11 @@ void	start_game(t_map *map);
 void	draw_floor_ceiling(t_img *img, t_map *map);
 void	free_text(t_map *map);
 void	free_args(t_args *args);
-int     ft_close_window(t_map *map);
+int		ft_close_window(t_map *map);
 int		is_border(char **tab, int i, int j);
 int		is_cub(char *str);
 int		in_tab(char *str, char **tab);
-int     check_newline(char *str);
+int		check_newline(char *str);
+int		check_double(char *str, char c);
 
 #endif
