@@ -6,7 +6,7 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 22:17:13 by tpassin           #+#    #+#             */
-/*   Updated: 2025/02/20 20:12:42 by tpassin          ###   ########.fr       */
+/*   Updated: 2025/03/05 17:36:42 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef struct s_ray
 {
 	t_vector2_d	raydir;
 	t_vector2_d	sidedist;
-	t_vector2_d	deltaDist;
+	t_vector2_d	deltadist;
 	double		perp_walldist;
 	int			lineheight;
 	int			start;
@@ -61,7 +61,7 @@ typedef struct s_ray
 	int			side;
 }				t_ray;
 
-typedef struct
+typedef struct s_img
 {
 	int			player;
 	int			height;

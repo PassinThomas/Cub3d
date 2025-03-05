@@ -6,7 +6,7 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:05:14 by tpassin           #+#    #+#             */
-/*   Updated: 2024/12/26 23:13:12 by tpassin          ###   ########.fr       */
+/*   Updated: 2025/03/05 17:36:42 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,23 +26,23 @@ void	init_ray_delta(t_ray *ray, t_map *map)
 	ray->mapx = (int)map->camera.pos.x;
 	ray->mapy = (int)map->camera.pos.y;
 	if (ray->raydir.x == 0)
-		ray->deltaDist.x = 1e30;
+		ray->deltadist.x = 1e30;
 	else
-		ray->deltaDist.x = fabs(1 / ray->raydir.x);
+		ray->deltadist.x = fabs(1 / ray->raydir.x);
 	if (ray->raydir.y == 0)
-		ray->deltaDist.y = 1e30;
+		ray->deltadist.y = 1e30;
 	else
-		ray->deltaDist.y = fabs(1 / ray->raydir.y);
+		ray->deltadist.y = fabs(1 / ray->raydir.y);
 	ray->mapx = (int)map->camera.pos.x;
 	ray->mapy = (int)map->camera.pos.y;
 	if (ray->raydir.x == 0)
-		ray->deltaDist.x = 1e30;
+		ray->deltadist.x = 1e30;
 	else
-		ray->deltaDist.x = fabs(1 / ray->raydir.x);
+		ray->deltadist.x = fabs(1 / ray->raydir.x);
 	if (ray->raydir.y == 0)
-		ray->deltaDist.y = 1e30;
+		ray->deltadist.y = 1e30;
 	else
-		ray->deltaDist.y = fabs(1 / ray->raydir.y);
+		ray->deltadist.y = fabs(1 / ray->raydir.y);
 }
 
 void	calcul_step(t_ray *ray, t_map *map)
@@ -51,24 +51,24 @@ void	calcul_step(t_ray *ray, t_map *map)
 	if (ray->raydir.x < 0)
 	{
 		ray->stepx = -1;
-		ray->sidedist.x = (map->camera.pos.x - ray->mapx) * ray->deltaDist.x;
+		ray->sidedist.x = (map->camera.pos.x - ray->mapx) * ray->deltadist.x;
 	}
 	else
 	{
 		ray->stepx = 1;
 		ray->sidedist.x = (ray->mapx + 1.0 - map->camera.pos.x)
-			* ray->deltaDist.x;
+			* ray->deltadist.x;
 	}
 	if (ray->raydir.y < 0)
 	{
 		ray->stepy = -1;
-		ray->sidedist.y = (map->camera.pos.y - ray->mapy) * ray->deltaDist.y;
+		ray->sidedist.y = (map->camera.pos.y - ray->mapy) * ray->deltadist.y;
 	}
 	else
 	{
 		ray->stepy = 1;
 		ray->sidedist.y = (ray->mapy + 1.0 - map->camera.pos.y)
-			* ray->deltaDist.y;
+			* ray->deltadist.y;
 	}
 }
 
@@ -81,13 +81,13 @@ void	dda(t_map *map, t_ray *ray)
 	{
 		if (ray->sidedist.x < ray->sidedist.y)
 		{
-			ray->sidedist.x += ray->deltaDist.x;
+			ray->sidedist.x += ray->deltadist.x;
 			ray->mapx += ray->stepx;
 			ray->side = 0;
 		}
 		else
 		{
-			ray->sidedist.y += ray->deltaDist.y;
+			ray->sidedist.y += ray->deltadist.y;
 			ray->mapy += ray->stepy;
 			ray->side = 1;
 		}

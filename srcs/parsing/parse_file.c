@@ -6,7 +6,7 @@
 /*   By: tpassin <tpassin@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 05:02:29 by emehdaou          #+#    #+#             */
-/*   Updated: 2025/03/05 16:24:45 by tpassin          ###   ########.fr       */
+/*   Updated: 2025/03/05 17:42:19 by tpassin          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int	check_args(char **file, t_args *args)
 	while (++i < 6)
 	{
 		if (check_double(file[i], ','))
-			return (1);
+			return (free_args(args), 1);
 		tmp = ft_split(file[i], " ,");
 		if (!tmp)
 			return (free_tab(tmp), free_args(args), printf("Error\n"), 1);

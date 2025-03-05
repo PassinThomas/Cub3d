@@ -1,7 +1,7 @@
 NO ./textures/so.xpm
 C 225,30,255
 SO ./textures/wolfenstein/purple_stone.xpm        
-F 220,1,6
+F 220, 1,6
 EA ./textures/wolfenstein/wood.xpm
 WE ./textures/wolfenstein/red_brick.xpm
 
